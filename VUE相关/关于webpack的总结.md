@@ -59,7 +59,32 @@ const config = {
 module.exports = config
 ```
 
-## 二. 入口起点(entry points)
+## 二. 跨域代理问题(http-proxy)
+```
+devServer: {
+  proxy: {
+    '/api': 'http://www.org.com:3000'  // 此时 访问 '/api/user' 就是 'http://www.org.com:3000/api/user'
+  },
+
+  proxy: {
+    '/api': 'http://www.org.com:3000'  // 此时 访问 '/api/user' 就是 'http://www.org.com:3000/user'
+    pathRewrite: {
+      '/api': ''  // 意思就是重写了api
+    }
+  }
+
+  proxy: {
+    '/api': 'http://www.org.com:3000'  // 此时 访问 '/api/user' 就是 'http://www.org.com:3000/v2/user'
+    pathRewrite: {
+      '/api': 'v2'  // 意思就是重写了api
+    }
+  }
+}
+
+```
+## 三. 关于环境变量的问题
+## 四. 关于webpack的优化
+ 1. 有些第三方的包没有依赖 就可以忽略依赖检测  配置方法
 
 
 
