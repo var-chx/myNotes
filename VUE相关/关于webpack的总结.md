@@ -85,7 +85,68 @@ devServer: {
 ```
 ## 三. 关于环境变量的问题
 ## 四. 关于webpack的优化
- 1. 有些第三方的包没有依赖 就可以忽略依赖检测  配置方法
+ 1. 有些第三方的包没有依赖 就可以忽略依赖检测  配置方法 使用 noParse 
+ 2. 使用loader 时 用
+ 3. 使用多线程打包  happyPack 方法 包裹下 loader 在插件中 new 出来 用 id对应关联起来
+ 4. (webpack自带的优化) tree-shaking 用import 引入 而不要用 require  以为 import 用了 tree-shaking 把没用的代码自动删除 比如 
+ ```
+ import fn1 from './fn.js'
+ // fn.js 中包含了多个方法 如 fn1 ,fn3, ...
+ // 但是 我们项目中只引用的 fn1  则 打包时代码中只会包含 fn1 的方法
+ ```
+ 5. (webpack自带的优化)scope hosting(作用域提升)
+ ```
+ var a = 1
+ var b = 2
+ var c = 3
+ var d = a + b + c
+ console.log(d) 
+ // 此段代码很啰嗦 webpack会自动帮我们简化代码
+ ```
+ 6. 如果是多入口的话 可以考虑抽离公共模块
+ ```
+  entry: { // 此时就定义了两个入口文件
+    index: './src/index.js',
+    other: './src/other.js'
+  },
+  optimization: {
+    splitChuncks: { // 分割代码块
+      cacheGroups: { // 缓存组
+        common: {             // 公共的缓存 里边可以配置缓存策略
+          chuncks: 'intiial'     // 从入口处抽离
+          minSize: 0,            // 最小这么大的就要抽离了
+          minChuncks: 2,         // 被引用了2次就要抽离了
+        },
+        vender: {             // 第三方的
+          priority: 1,           // 优先级  此时就会先抽离 vender 再抽离 common
+          test: /node_modules/,  // 正则  把这个文件夹里的抽离出来
+          chunks: 'initial',
+          minSize: 0,
+          minChuncks: 2
+        }
+
+      }
+  
+
+    }
+  }
+ ```
+ 7. 关于懒加载
+  vue和react中的懒加载实现都是依靠这个功能
+  实现原理 
+ ```
+ // 给一个按钮注册点击事件
+ button.addEventListener('click', () => {
+   // 这个是草案的语法 需要安装插件  @babel/plugin-syntax-dynamic-import 获取支持
+   import('./source.js').then(data => {
+     console.log(data.default)
+   })
+   // 这样是实现了 点击按钮的时候动态的加载 ./source.js 的资源
+ })
+ ```
+
+
+
 
 # Vue cli 3.0
 
@@ -143,9 +204,3 @@ VUE_APP_BASE_API = '/dev-api'
 
   - NODE_ENV - 会是 "development"、"production" 或 "test" 中的一个。具体的值取决于应用运行的模式。
   - BASE_URL - 会和 vue.config.js 中的 publicPath 选项相符，即你的应用会部署到的基础路径。
-
-
-
-
-
-
