@@ -1,0 +1,61 @@
+## TypeScript
+### 时代抛弃你的时候 连一句再见都不会说
+### 1. 概念
+    js的超集 增强版的js 静态类型 和 有状态的对象 类似 less 和 sass  提供了类  接口 模块
+
+### 2. 安装 
+    sodu npm i typescript -g
+
+### 3. 初始化项目
+    npm init 生成 package.json
+    tsc --init 生成 tscconfig.json
+    npm i @types/node -D 开发环境使用 模块的声明文件问题
+
+### 4. 数据类型
+    4.1 Boolean
+        let isTure: boolean = false
+
+    4.2 Number
+        let age: number = 23
+
+    4.3 String
+        let name: string = '啦啦啦'
+
+    4.4 Array
+        方法一
+        TypeScript像JavaScript一样可以操作数组元素。 有两种方式可以定义数组。 第一种，可以在元素类型后面接上 []，表示由此类型元素组成的一个数组：
+        let list: number[] = [1, 2, 3];
+        方法二
+        第二种方式是使用数组泛型，Array<元素类型>：
+        let list: Array<number> = [1, 2, 3];
+
+    4.5 Any
+        有时候，我们会想要为那些在编程阶段还不清楚类型的变量指定一个类型。 这些值可能来自于动态的内容，比如来自用户输入或第三方代码库。 这种情况下，我们不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查。 那么我们可以使用 any类型来标记这些变量：
+        let notSure: any = 4;
+        notSure = "maybe a string instead";
+        notSure = false; // okay, definitely a boolean
+
+    4.6 Void
+        某种程度上来说，void类型像是与any类型相反，它表示没有任何类型。 当一个函数没有返回值时，你通常会见到其返回值类型是 void：
+        function warnUser(): void {
+        alert("This is my warning message");
+        }
+        注意：声明一个void类型的变量没有什么大用，因为你只能为它赋予undefined和null
+        let unusable: void = undefined
+
+    4.7 Null 和 Undefined
+        TypeScript里，undefined和null两者各自有自己的类型分别叫做undefined和null。 和 void相似，它们的本身的类型用处不是很大：
+
+        // Not much else we can assign to these variables!
+        let u: undefined = undefined;
+        let n: null = null;
+    4.8 元组 Tuple
+        元组类型允许表示一个已知元素数量和类型的数组，各元素的类型不必相同。 比如，你可以定义一对值分别为 string和number类型的元组。
+```
+        let tup: [number, string] = [27, "jianan"];
+        console.log(tup);
+        console.log(tup[0], tup[1]);
+        
+        let a: Array<[number, string]> = [[27, "jianan"], [28, "xixi"]];
+        console.log(a);
+```
