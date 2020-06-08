@@ -1,22 +1,22 @@
 # Git使用规范及分支管理
 
 ## 常用Git命令
-1. 查看分支：git branch
++  查看分支：git branch
 
-2. 创建分支：git branch <name>
++ 创建分支：git branch <name>
 
-3. 切换分支：git checkout <name>
++ 切换分支：git checkout <name>
 
-4. 创建+切换分支：git checkout -b <name>
++ 创建+切换分支：git checkout -b <name>
 
-5. 合并某分支到当前分支：git merge <name>  
++ 合并某分支到当前分支：git merge <name>  
 
-6. 删除分支：git branch -d <name> 注意:删除当前分支 需要切换到其他分支   如果要删除的分支没有和当前的分支合并 会提示的 删除失败  真要删除 用 -D
++ 删除分支：git branch -d <name> 注意:删除当前分支 需要切换到其他分支   如果要删除的分支没有和当前的分支合并 会提示的 删除失败  真要删除 用 -D
 
 ## 分支管理
 
-### gitHub https://github.com/orgs/starcloud-ai
-### gitLab http://git.in-clustar.ai/
++ gitHub https://github.com/orgs/starcloud-ai
++ gitLab http://git.in-clustar.ai/
 ## 主要分支
 
 ### master 
@@ -54,10 +54,10 @@ $git push origin OPS-9999:OPS-9999
 
 ## 建议使用规范
 
-### 分支上开发的commit建议合并为一个commit, 这样易读, 方便主分支管理.
-### 辅助分支及时删除
-### 冲突提交
-+ 修改完冲突, 我们会进行commit提交冲突修改. 不要使用git commit -m, 请直接使用git commit, git会识别你这是一个冲突提交.
++ 分支上开发的commit建议合并为一个commit, 这样易读, 方便主分支管理.
++ 辅助分支及时删除
++ 冲突提交
+    + 修改完冲突, 我们会进行commit提交冲突修改. 不要使用git commit -m, 请直接使用git commit, git会识别你这是一个冲突提交.
 
 
 ## 参考
