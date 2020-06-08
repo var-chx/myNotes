@@ -30,9 +30,8 @@
 ### feature
 + 功能开发分支, 从develop分支而来, 然后合并入develop, 进行测试.
 + 测试过程中直到功能上线 都在此分支进行 
-+ 
 ### hotfix
-+ 修改bug 要从develop 分支checkout出 bug分支名称与jira 条目保持一致 如 [OPS-6666] bug验证通过后删除
++ 修改bug 要从 master 分支checkout出 bug分支名称与jira 条目保持一致 如 [OPS-6666] bug验证通过后删除
 
 ## 如何使用各种分支
 
