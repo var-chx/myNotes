@@ -1,7 +1,7 @@
 # Git使用规范及分支管理
 
 ## 常用Git命令
-+  查看分支：git branch
++ 查看分支：git branch
 
 + 创建分支：git branch <name>
 
@@ -28,8 +28,9 @@
 ## 辅助分支
 
 ### feature
-+ 功能开发分支, 从develop分支而来, 然后合并入develop, 进行测试.
++ 功能开发分支, 从 master 分支而来, 然后合并入develop, 进行测试.
 + 测试过程中直到功能上线 都在此分支进行 
++ 上线时将此分支 合并到 master
 ### hotfix
 + 修改bug 要从 master 分支checkout出 bug分支名称与jira 条目保持一致 如 [OPS-6666] bug验证通过后删除
 
