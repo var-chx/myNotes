@@ -45,12 +45,37 @@
     - 从 master 分支 分出 自己的 feature分支 名称与jira 条目保持一致 如 [OPS-9999]
     - 开发完毕后合并回 develop分支 部署开发环境 开始测试
     - 测试通过后 将feature分支(此时为OPS-9999)合并到 master 部署正式环境
+![Image](./assets/dev-new-feater.jpg)
+
 ```
 使用 New Merge Requests 方式 通知协同开发人员 review LGTM 后 合并代码 部署开发环境
 ```
 
 ### 修改线上 bug
 + 一般线上出现的 bug 在 develop 也会存在 可以从 master 分支 切出来 bug分支 名称和与jira条目保持一致 如 [OPS-6666] 修改 后 在 develop 环境验证通过后 把此分支合并到master 完成 线上 bug 的修复
+
+![Image](./assets/fix-bug.jpg)
+
+## 关于提交
++ 提交时添加本次 commit 的 type
+```
+git commit -m 'feat: Add carsList formater'
+```
++ Type的类型说明
+    - init: 项目初始化
+    - feat: 添加新特性
+    - fix: 修复bug
+    - docs: 仅仅修改了文档
+    - opt: 优化和改善 比如弹窗进行确认提示等相关的 不会改动逻辑和具体功能等
+    - style: 仅仅修改了空格 格式缩进 逗号等等 不改变代码逻辑
+    - refactor: 代码重构 没有添加新的功能和修复bug
+    - perf: 增加代码进行性能测试
+    - test: 增加测试用例
+    - chore: 改变构建流程 或者增加依赖库 工具等
+    - sava: 单纯的保存记录
+    - other: 用于难以分类的类别（不建议使用，但一些如删除不必要的文件，更新.ignore之类的可以使用）
+
+
 
 ## 建议使用规范
 
@@ -63,6 +88,7 @@
 ## 参考
 + [Git 工作流程](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html)
 + [Git 使用规范流程](http://www.ruanyifeng.com/blog/2015/08/git-use-process.html)
++ [如何写好git commit message](https://www.cnblogs.com/deng-cc/p/6322122.html)
 
 
     
