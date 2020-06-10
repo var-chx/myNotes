@@ -29,26 +29,25 @@
 
 ### feature
 + 功能开发分支, 从 master 分支而来, 然后合并入develop, 进行测试.
-+ 测试过程中直到功能上线 都在此分支进行 
++ 测试过程中修改bug直到功能上线 都在此分支进行 
 + 上线时将此分支 合并到 master
 ### hotfix
-+ 修改bug 要从 master 分支checkout出 bug分支名称与jira 条目保持一致 如 [OPS-6666] bug验证通过后删除
++ 修改线上bug 要从 master 分支checkout出 bug分支名称与jira 条目保持一致 如 [OPS-6666] bug验证通过后删除
 
 ## 如何使用各种分支
 
 ### 开发新功能 - feature
-+ 从develop 分支 分出 自己的 feature分支 名称与jira 条目保持一致 如 [OPS-9999]
-```
-$git checkout develop
-$git pull
-$git checkout -b OPS-9999
-$git push origin OPS-9999:OPS-9999
-```
-+ 开发完毕后合并回 develop分支 部署开发环境 开始测试
++ 一般情况 同时开发的功能节点较少
+    - 从develop 分支 分出 自己的 feature分支 名称与jira 条目保持一致 如 [OPS-9999]
+    - 开发完毕后合并回 develop分支 部署开发环境 开始测试
+    - 测试通过后 将develop分支合并到 master 部署正式环境
++ 其他情况 同时开发的功能较多 且 上线时间不统一
+    - 从 master 分支 分出 自己的 feature分支 名称与jira 条目保持一致 如 [OPS-9999]
+    - 开发完毕后合并回 develop分支 部署开发环境 开始测试
+    - 测试通过后 将feature分支(此时为OPS-9999)合并到 master 部署正式环境
 ```
 使用 New Merge Requests 方式 通知协同开发人员 review LGTM 后 合并代码 部署开发环境
 ```
-+ 修改开发环境的bug 也在此分支进行
 
 ### 修改线上 bug
 + 一般线上出现的 bug 在 develop 也会存在 可以从 master 分支 切出来 bug分支 名称和与jira条目保持一致 如 [OPS-6666] 修改 后 在 develop 环境验证通过后 把此分支合并到master 完成 线上 bug 的修复
