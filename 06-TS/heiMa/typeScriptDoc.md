@@ -1,12 +1,13 @@
-## 安装运行环境
+## 一、安装运行环境
 ### 让 vs code 自动将ts 转为 js
 + 运行 tsc --init 创建 tscconfig.json 文件
 + 修改 tscconfig.json 文件 设置 outDir: './js/'
 + 设置 vs code 监视任务 终端 --> 运行任务 --> tsc 监视
 
+## 二、核心语法
 ### 变量的声明
 + 数据类型
-    - 原有数据类型 <br/>
+    - 原有数据类型
         * string 
         * number 
         * boolean 
@@ -124,4 +125,95 @@
         let x: never = test()
         let y: string = test()
         ```
+### TypeScript 函数
++ 函数必须要定义返回值类型 如果没有返回值 定义为 void
+```
+    function sayHi(cityName: string):void {
+        console.log(cityName)
+    }
+```
++ 实参和形参的 类型 数量 要一致 可选参数后加 ?
+```
+    function sayHi(cityName: string, age: number, six?: Gender): void {
+        //
+    }
+```
++ 函数默认值 有默认值就不需要 ? 标示可选参数了  因为js中 带默认值的 本身就是可选参数
+```
+    function sayHi(cityName: string = 'beijing', age: number = 12): void {
+        //
+    }
+    // 调用
+    * 不传递参数:      函数名()                   全部采用默认值
+    * 传递一个参数:    函数名(实参1)              函数名(实参1, 默认值)
+    * 只传递第二个参数: 函数名(undefined, 实参2)   函数名(默认值, 实参2)  
+```
++ 函数中的剩余参数  传参个数不确定
+```
+    function add(x: number, y: number, ...arr:number[]): void {
+        let resNum: number = x + y
+        for (let ele of arr) {
+            resNum += ele
+        }
+        console.log(resNum)
+
+    }
+    // 特定
+    * 剩余参数 只能 定义一个
+    * 剩余参数 只能 定义为数组
+    * 剩余参数 只能 定义在 形参列表最后
+```
+### 类
++ 封装
+```
+    class City {
+        // 成员 变量
+        cNmae: string
+        cLevel: number
+        // 构造函数 主要接受参数
+        constructor(name: string, level: number) {
+            this.cName = name
+            this.cLevel = level
+        }
+        // 成员方法
+        about() {
+            console.log(`换用来到${cName}, 此地危险系数为${cLevel}`)
+        }
+    }
+```
++ 创建对象
+```
+let c1 = new City('P城', 5)
+
+```
++ 调用
+```
+c1.about
+c1.cName
+```
+
+## 三、数据类封装
+
+### LocalStroage 操作
++ 概念: LoacalStroage 用于在浏览器端 持久化保存 键值对 数据
++ 特点:
+    - 大小限制: 5M (chrome) 更大的数据  使用 indexDB | webSql
+    - 受同源访问的限制 不允许跨域访问  
+    - 在浏览器的隐私模式下 也是无法使用
+    - 因为只在本地存储 不会发送数据 网络爬虫无法获取
+    - 只能存放字符串
++ 基本语法
+    - 存放键值对数据 localStorage.setItem('key', 'value')
+    - 根据 key 查询 value localStorage.getItem('key') 没有查到 返回 null
+    - 根据 key 删除 键值对 localSrorage.removeItem('key')
+    - 清空所有的键值对 localStorage.clear()
++ localStorage 读写 对象
+    - 先将对象 转成 JSON 字符串 然后再保存
+    ```
+    let strJson: 
+    ```
+
+
+### DataHelper 类 设计
+### DataHelper 类 实现
 
