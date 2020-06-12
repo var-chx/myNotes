@@ -30,7 +30,7 @@ sudo npm install -g yarn
 
     // 同样的 upgrage (升级) remove(移除)
     ```
-    - 将依赖添加开发依赖中 devDependencise
+    - 将依赖添加开发依赖中 devDependencies
     ```
 
     yarn add [package] --dev  // 默认不加参数  是安装到生产依赖中
