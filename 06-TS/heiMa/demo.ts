@@ -1,15 +1,20 @@
-let str:string = '123'
-console.log(str)
-console.log(str)
-console.log(str)
-console.log(str)
-console.log(str)
-console.log(str + 1)
-console.log(str + 2)
-console.log(str + 3)
-enum Gender {
-    Boy =  1,
-    Gril = 2,
-    Unknown = 3
+class DataHelprt {
+    dataKey: string
+    primaryKey: string
+
+    constructor(dataKey: string, primaryKey: string) {
+        this.dataKey = dataKey
+        this.primaryKey = primaryKey
+    }
+    // 获取本地数据转换为数组
+    readData() {
+        let strData: string | null = localStorage.getItem(this.dataKey)
+        let arrData: any = []
+        if (strData !== null) {
+            arrData = JSON.parse(strData)
+        }
+        return arrData
+    }
+    
+
 }
-console.log(Gender.Boy)

@@ -208,12 +208,16 @@ c1.cName
     - 根据 key 删除 键值对 localSrorage.removeItem('key')
     - 清空所有的键值对 localStorage.clear()
 + localStorage 读写 对象
-    - 先将对象 转成 JSON 字符串 然后再保存
     ```
-    let strJson: 
+    let strJson: string = JSON.stringfly(对象)
+    localStorage.setItem('key', strJson)
+
+    let strJson: string | null = localStorage.getItem('key')
+    let obj = JSON.parse(strJson as string)
     ```
 
 
-### DataHelper 类 设计
-### DataHelper 类 实现
+## 四、Vue 中使用 TS
++ 搭建 vue + ts 脚手架
++ 项目结构分析
 
