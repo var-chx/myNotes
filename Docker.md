@@ -28,8 +28,7 @@
 - 镜像的拉取 docker pull centos:7 (如果不指定版本号 则拉取最新的版本)
 - 镜像的删除 dockre rmi + IMAGE ID  (docker rmi 'docker images -q' 全部删除)
 
-### 查看 & 创建并启动交互式容器
-- 交互式容器: 启动容器后会直接进入容器的命令行终端 如果退出 容器停止运行
+### 查看 & 创建并启动容器
 - 查看正在运行的容器 docker ps
 - 查看所有的容器 docker ps -a
 - 创建并启动容器 docker run -it --name=mycentos7 centos /bin/bash
@@ -40,15 +39,17 @@
     > -d 创建守护式容器在后台运行
     > -p 表示端口映射 
 - 交互式容器 docker run -it --name=mycentos7 centos /bin/bash
-    - 已交互式方式创建并启动容器 启动完成后 直接进入当前容器 使用 exit 命令退出 注意: 此容器退出 容器就进入 停止状态
-- 守护式容器 docker run 
-    - 创建docker容器 可以在后台运行
-    
+    - 已交互式方式创建并启动容器 启动完成后 直接进入当前容器 
+    - 注意:
+    > 使用 exit 命令退出 注意: 此容器退出 容器就进入 停止状态
+- 守护式容器 : 可以在后台运行
+    - 创建并启动  docker run -id --name=mycentos2 centos
+    - 容器启动后再进入 docker exec -it mycentos2(或者id) /bin/bash
+    - 注意
+    > 守护式容器启动后会在后台一直运行 执行 exit 命令退出 也不会停止容器
 
-
-
-
-
-
-
+### 容器的操作
+- 停止容器 docker stop 名称(|id)
+- 启动容器 docker start 名称(|id)
+- 文件拷贝 
 
