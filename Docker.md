@@ -52,4 +52,10 @@
 - 停止容器 docker stop 名称(|id)
 - 启动容器 docker start 名称(|id)
 - 文件拷贝 
+    - 把当前文件夹的Mac.md 拷贝到容器 docker cp Mac.md mycentos2:/ 
+    - 把容器中的文件复制到 当前目录 docker cp mycentos2:/abc.js ./
+- 目录挂载 
+    - docker run -id -v /usr/local/test:/use/local/test --name=mycentos3 centos
+    - 宿主机目录 : 容器目录
+
 
