@@ -26,7 +26,28 @@
 - 查看镜像 docker images 
 - 镜像的搜索 docker search centos7 
 - 镜像的拉取 docker pull centos:7 (如果不指定版本号 则拉取最新的版本)
-- 镜像的删除 dockre rmi + IMAGE ID
+- 镜像的删除 dockre rmi + IMAGE ID  (docker rmi 'docker images -q' 全部删除)
+
+### 查看 & 创建并启动交互式容器
+- 交互式容器: 启动容器后会直接进入容器的命令行终端 如果退出 容器停止运行
+- 查看正在运行的容器 docker ps
+- 查看所有的容器 docker ps -a
+- 创建并启动容器 docker run -it --name=mycentos7 centos /bin/bash
+    - 参数说明: 
+    > -i 表示运行容器 <br/>
+    > -t 表示启动容器后会进入命令行 容器创建就能进去 分配一个伪终端 <br/>
+    > -v 目录映射 最好做目录映射 在宿主机上做修改 然后共享到容器上
+    > -d 创建守护式容器在后台运行
+    > -p 表示端口映射 
+- 交互式容器 docker run -it --name=mycentos7 centos /bin/bash
+    - 已交互式方式创建并启动容器 启动完成后 直接进入当前容器 使用 exit 命令退出 注意: 此容器退出 容器就进入 停止状态
+- 守护式容器 docker run 
+    - 创建docker容器 可以在后台运行
+    
+
+
+
+
 
 
 
