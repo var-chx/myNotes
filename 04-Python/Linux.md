@@ -29,7 +29,9 @@
         - 常用的命令 more 分屏 grep  在执行结果的基础上查询指定的文本
     15. 关机  shutdown -r 重启
     16. 查看网卡信息  ifconfig | grep inet
-    17. 常用的 
+    17. scp  远程拷贝文件:
+        - 上传视频的方式 scp xxx.mp4 work@35.194.205.82:/home/work/site/video/
+
 
 
 
