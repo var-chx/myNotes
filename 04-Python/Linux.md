@@ -31,8 +31,9 @@
     16. 查看网卡信息  ifconfig | grep inet
     17. scp  远程拷贝文件:
         - 上传视频的方式 scp xxx.mp4 work@35.194.205.82:/home/work/site/video/
-
-
+    18. 查看 终端命令的位置
+        - which npm  // /usr/local/bin/npm
+        - which python  // /usr/bin/python
 
 
 
