@@ -47,6 +47,22 @@
 ## 第一个 Python 
 - 每一个程序员都是子啊不断的修改错误中成长的
 
+# 运行Python的三种方式
+- 交互式 适合验证语法等简单的操作
+    - 直接在终端输入 python3  exit()或者 ctrl + D 退出
+
+## 安装 Pycharm IDE
+- 第一次启动  不用导入配置文件  选第二项 ok 下一步
+- 许可证激活  选 free 30days
+- 设置配色 --> ok
+- 设置项目的解释器版本
+    - file--> setting --> Project --> 到自己项目 --> Prject Interpreter -- ok
+    
+
+ 
+
+
+
 
 
 
