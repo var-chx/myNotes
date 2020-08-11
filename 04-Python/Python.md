@@ -108,6 +108,116 @@
     print(qq_number)
 
     ```
+- 变量的类型 声明时不需要指定类型
+    ```
+    // str
+    name = "小明"
+
+    // int 整型
+    age = 18
+
+    // boolean  注意大写
+    gender = True 
+
+    // float  浮点数
+    height = 1.75
+
+    ```
+- type函数检查变量类型   type(name)
+
+## input 函数 实现 键盘输入
+```
+
+password = input("请输入您的银行密码")
+type(password)
+
+```
+## 类型转换函数
+ ```
+ int(x) // 将x转换为int
+ float('123')  // 123.0
+ ```
+
+ ## 格式化输出
+ ```
+ // 表示字符串
+name = "小明"
+print("我的名字叫 %s, 请多多关照" %name)
+
+// 表示数字
+student_no = 100 
+print("我的学号是 %06d" % student_no) // 000100 不够 6位 会补零
+
+// 表示浮点数 可控制精度
+price = 8.5
+weight = 7.5
+num = price * weight
+print("苹果的价格是 %.2f, 重量是%.3f , 您要支付的价格是%.4f" % (price, weight, num))  // 苹果的价格是 8.50, 重量是7.500 , 您要支付的价格是63.750
+
+// 输出 % 需要 %%
+price = 85
+print("%.2f%%" %(price / 100)) // 8.50%
+
+ ```
+
+ ## 变量的命名
+ - 标识符 可以由 字母 下划线 数字 组成
+ - 不能用数字开头
+ - 不能喝关键字重名
+
+ ## 关键字
+ - import 关键字 就可以导入一个包
+    ```
+    import keyword 
+    print (keyword.kwlist) 
+
+    """
+    ['False', 'None', 'True', 'and', 'as', 'assert', 'async', 'await', 'break', 'class', 'continue', 'def', 'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in', 'is', 'lambda', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try', 'while', 'with', 'yield']
+    """
+
+    ```
+
+## 变量命名规则
+- 标识符是区分大小写的
+- 使用短横线连接 first_name last_name qq_number
+
+## if 语句 通过缩进控制 注意 关键字后的: 
+```
+age = 15 
+if age >= 18:
+    print("我已经18岁了")
+elif age > 27:
+    print("哈哈)
+else:
+    print("我是else")
+print("我永远会执行")
+
+```
+
+## 逻辑运算符 and or not取反
+
+## if 语句的嵌套  注意 缩进就行
+
+## 循环 while
+```
+count = 0 
+while const < 5:
+    print(const)
+    const = const + 1
+else:
+    print(const)
+```
+## break 和 continue
+- break 是跳出整个循环
+- continue 跳出本次循环
+
+## 函数
+
+
+
+
+
+
 
 
 
