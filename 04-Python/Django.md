@@ -39,7 +39,7 @@ python3 manage.py runserver 127.0.0.1:8080
 # 配置
 - 模板路径
     ```
-    - 在根目录创建 template 文件夹
+    - 在根目录创建 template 文件
     - settings.py TEMPLATES 'DIRS': [os.path.join(BASE_DIR, 'templates')],
     ```
 - 静态文件路径
