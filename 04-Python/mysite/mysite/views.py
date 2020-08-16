@@ -10,7 +10,12 @@ def index_view(request):
 
 def login_view(request):
     if request.method == "GET":
-        return render(request, "login.html", {"msg": 123423})
+        import pymysql
+        conn = pymysql.connect(host="127.0.0.1", port=3306, user="root", passwd="123456", db="test_db")
+        cursor = conn.cursor()
+        cursor.execute("select * from tb_empl")
+        result = cursor.fetchall()
+        return render(request, "login.html", {"msg": result})
     else:
         u = request.POST.get("user")
         p = request.POST.get("password")

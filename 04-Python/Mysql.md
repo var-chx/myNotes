@@ -27,10 +27,14 @@ docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
     # -e：配置信息，此处配置mysql的root用户的登陆密码
     # -p：端口映射，此处映射 主机3306端口 到 容器的3306端口
 ```
+## 关闭容器启动容器
+```
+docker stop\start id 
+```
 ## 链接mysql
 ```
-docker exec -it mysql bash
-mysql -uroot -p123456
+docker exec -it mysql bash // 这样就进入mysql了 此时 ctrl + D 可以退出容器 就是 exit
+mysql -uroot -p123456 //  用户密码登录数据库 此时 ctrl + c 可以退出 当前命名行 就是 quit;
 ```
 ## 退出 sql 命令行
 ```
@@ -94,4 +98,23 @@ mysql> show create table tb_empl;
 +---------+--------------------------------------------------------------+
 1 row in set (0.00 sec)
 ```
+ ## 数据库的CRUD
+ - 增加(Create) insert
+ ```
+ insert tb_empl(id, name, deptId, salary) values (12, 'Tim', 100, 3.4);
+ ```
+ - 删除(Delete)
+ ```
+ delete from 表名 where id = 123;
+ ```
+ - 改(Update)
+ ```
+update 表名 set name="limng" where id=1;                   
+ ```
+ - 检索 (retrieve)
+ ```
+select * from 表名;
+ ```
+
+
 
