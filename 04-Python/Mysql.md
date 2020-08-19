@@ -116,5 +116,47 @@ update 表名 set name="limng" where id=1;
 select * from 表名;
  ```
 
+ ## 对表的操作
+ - 将已经存在表设置自动增长属性
+ ```
+ alter table customers change id id int not null auto_increment primary key;
+ ```
+
+- 其他:
+```
+//添加字段并设置主键
+ALTER TABLE tabelname ADD new_field_id int(5) unsigned default 0 not null auto_increment ,ADD primary key (new_field_id);
+//加主关键字的索引
+ALTER TABLE tablename ADD primary key(id);
+//加索引   www.2cto.com  
+ALTER TABLE tablename CHANGE depno depno int(5) not null;
+ALTER TABLE tablename ADD INDEX 索引名 (字段名1[，字段名2 …]);
+ALTER TABLE tablename ADD INDEX emp_name (name);
+//加唯一限制条件的索引
+ALTER TABLE tablename ADD UNIQUE emp_name2(cardnumber);
+//删除某个索引
+ALTER TABLE tablename DROP INDEX emp_name;
+ 
+//增加字段：
+ALTER TABLE table_name ADD field_name field_type;
+//删除字段
+ALTER TABLE table_name DROP field_name;
+//重命名列
+ALTER TABLE table_name CHANGE field_name1 field_name2 integer;
+//调整字段顺序 
+ALTER TABLE `users` CHANGE `user_password` `user_password` varchar( 20 ) NOT NULL AFTER user_name;
+//改变列的类型
+ALTER TABLE table_name CHANGE field_name field_name bigint not null;
+ALTER TABLE infos CHANGE list list tinyint not null default '0';
+//修改原字段名称及类型：   www.2cto.com  
+ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;
+//重命名表
+ALTER TABLE table_name rename new_table_name;
+//级联更新 和 删除(红色部分,不区分大小写 )
+DROP TABLE IF EXISTS `mail_model`;create TABLE mail_model(id varchar(50) primary key not null ,mail_filename varchar(200),content varchar(2000))ENGINE=InnoDB DEFAULT CHARSET=gbk;
+DROP TABLE IF EXISTS `mail_model_extend`;create TABLE mail_model_extend(id int(6) auto_increment not null primary key,rid varchar(50) not null,content varchar(2000),INDEX (RID),FOREIGN KEY (RID) REFERENCES mail_model(ID) ON DELETE CASCADE ON UPDATE CASCADE)ENGINE=InnoDB DEFAULT CHARSET=gbk;
+
+```
+
 
 
