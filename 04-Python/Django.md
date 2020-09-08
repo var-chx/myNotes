@@ -63,3 +63,25 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 ```
+
+## 路由关系
+- url -> 函数
+
+## 视图函数
+```
+def index(request): 
+
+    # 关于获取的请求信息
+    request.method # POST GET
+    val = request.POST.get('title') # 获取前端的 title
+    val = request.GET.get('title') # 获取前端的 title
+
+    # 关于返回值 
+    # 注意使用前 先 引入 'from django.shortcuts import render, redirect, HttpResponse'
+    return redirect ('URL) # 重定向
+    return render(request, '模板路径', {}) # 可以使用模板
+    return HttpResponse
+
+```
+
+## 模板语法 略... 

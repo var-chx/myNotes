@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <p>{{name}}-{{message}}</p>
+        <p>{{name}}</p>
+        <p>{{message}}</p>
+    </div>
+</body>
+<script>
+    let tepNode = document.querySelector('#root')
+
+    let data = {
+        name: '小明',
+        message: '一个消息'
+    }
+
+    let rkuohao = /\{\{(.+?)\}\}/g
+
+    function compiler (template, data) {
+        let childNodes = template.childNodes
+        for (let i = 0; i < childNodes.length; i++) {
+            let type = childNodes[i].nodeType // 1 是元素; 3 是文本
+            if (type === 3) {
+                // 文本节点 可以判断里面是否有 {{}} 插值
+                let txt = childNodes[i].nodeValue
+                txt = txt.replace(rkuohao, (a, b) => {
+                    console.log(a, 1) // 匹配到的串
+                    console.log(b, 2) // 正则分组的值
+                    return data[b]
+                })
+                childNodes[i].nodeValue = txt
+
+
+            } else if (type === 1) {
+                // 元素节点 考虑它有没有 子元素 就需要递归了
+                compiler(childNodes[i], data)
+            }
+        }
+    }
+
+    let generateNode = tepNode.cloneNode(true)
+
+    compiler(generateNode, data)
+
+    root.parentNode.replaceChild(generateNode, root)
+
+
+</script>
+</html>

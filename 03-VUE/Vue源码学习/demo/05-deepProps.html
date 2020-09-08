@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <p>{{name.firstName}}</p>
+        <p>{{name.lastName}}</p>
+    </div>
+</body>
+<script>
+    function getValByPath (obj, path) {
+        let paths = path.split('.')
+        let res = obj
+        paths.forEach(item => {
+            res = res[item]
+        })
+        return res
+    }
+    function compiler (template, data) {
+        let childNodes = template.childNodes
+        for (let i = 0; i < childNodes.length; i++) {
+            let type = childNodes[i].nodeType // 1 是元素; 3 是文本
+            if (type === 3) {
+                // 文本节点 可以判断里面是否有 {{}} 插值
+                let txt = childNodes[i].nodeValue
+                let rkuohao = /\{\{(.+?)\}\}/g
+                txt = txt.replace(rkuohao, (a, b) => {
+                    console.log(a, 1) // 匹配到的串
+                    console.log(b, 2) // 正则分组的值
+                    // return data[b.split('.')[0]][b.split('.')[1]]
+                    return getValByPath(data, b)
+                })
+                childNodes[i].nodeValue = txt
+
+            } else if (type === 1) {
+                // 元素节点 考虑它有没有 子元素 就需要递归了
+                compiler(childNodes[i], data)
+            }
+        }
+    }
+    class JGVue{
+        constructor (options) {
+            // 习惯: 内部的数据使用下划线 开头 , 只读数据用 $ 开头
+            this._data = options.data
+            this._el = options.el
+    
+            // 准备工作 (准备模板)
+            this._templateDOM = document.querySelector(this._el)
+
+            // 渲染工作
+            this.render()
+        }
+        // 渲染
+        render () {
+            this.compoler()
+        }
+
+        // 编译 把模板和数据 得到 dom元素
+        compoler () {
+            let realHTMLDOM = this._templateDOM.cloneNode(true)
+            compiler(realHTMLDOM, this._data)
+            this.updata(realHTMLDOM)
+        }
+
+        // 更新 将dom元素 放到页面中
+        updata (real) {
+            this._templateDOM.parentNode.replaceChild(real, root)
+        }
+    }
+
+    let app = new JGVue({
+        el: '#root',
+        data: {
+            name: {
+                firstName: "张三",
+                lastName: '丰'
+            }
+        }
+    })
+    
+</script>
+</html>
