@@ -50,13 +50,17 @@
 
 - 真实DOM => virtual DOM 
 ```
-<div title="1" class="c">你好</div> => { tag: 'div',
-                                        data: {
-                                            titel: '1',
-                                            class: 'c'
-                                        }, 
-                                        value: '你好',
-                                      }
+<div title="1" class="c">
+    你好
+</div>
+==> 
+{ tag: 'div',
+  data: {
+    titel: '1',
+    class: 'c',
+  }, 
+  value: '你好',
+}
 ```
 
 ### 函数柯里化
