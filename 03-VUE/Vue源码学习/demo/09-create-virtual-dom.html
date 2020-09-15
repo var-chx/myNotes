@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <div class="c1">
+          <div title="tt1" id="id">hello1</div>
+          <div title="tt2">hello2</div>
+          <div title="tt3">hello3</div>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+        </div>
+    </div> 
+</body>
+<script>
+    // 定义 virtual DOM 的结构
+    class VNode {
+        constructor ( tag, data, value, type) {
+            this.tag = tag
+            this.data = data
+            this.value = value
+            this.type = type
+            this.children = []
+        }
+        appendChild ( vnode ) {
+            this.children.push(vnode)
+        }
+    }
+    // 使用递归 来遍历 DOM 元素 生成虚拟 DOM
+    
+
+    
+</script>
+</html>
