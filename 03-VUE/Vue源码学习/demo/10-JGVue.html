@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class JGVue {
+        constructor (options) {
+            this._data = options.data
+            this.el = options.el
+            // 挂载
+            this.mount() 
+        }
+
+        mount () {
+            // 提供 render 方法 生成虚拟dom
+            this.render = this.createRenderFn()
+            this.mountComponent()
+        }
+        mountComponent () {
+            let mount = () => {
+                this.update(this.render())
+            }
+            mount.call(this) // 本质要交给 watcher 来调用
+        }
+        // 生成 render 函数, 目的是缓存 抽象语法树 (我们使用 虚拟dom来模拟)
+
+    }
+</script>
+</html>
