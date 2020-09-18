@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    let obj = {
+        name: 'jim',
+        age: 18,
+        gender: '男'
+    }
+    function defineReactive (target, key, val) {
+        Object.defineProperty(target, key, {
+            configurable: true,
+            enumerable: true,
+            get () {
+                console.log(`读取 obj 的${key}`)
+                return val
+            },
+            set (newVal) {
+                console.log(`设置 obj 的 ${key}, 值为${newVal}`)
+                val = newVal
+            }
+        })
+    }
+    Object.keys(obj).forEach(key => {
+        defineReactive(obj, key, obj[key])
+    })
+</script>
+    
+</body>
+</html>

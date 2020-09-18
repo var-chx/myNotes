@@ -124,7 +124,91 @@
     1. 二阶段提交（Two-phase Commit):为了使基于分布式系统架构下的所有节点在进行事务提交时保持一致性而设计的一种算法(银行 A账户给B账号转钱 案例 )
 
 ### 响应式原理
+- 本质
+    在给对象赋值和读取的时候 附带的要做一些事情
+- 关键的 Object.defineProperty 实现响应式
+```js
+var o = {}; 
+    
+// 给 o 提供属性
+o.name = '张三';
 
+// 等价于
+Object.defineProperty( o, 'name', {
+    configurable: true, // 可配置  如果 false 定义 defineProperty 是无效的
+    writable: true, // 可以改
+    enumerable: true, // 控制属性是否可枚举, 是不是可以被 for-in 取出来 比如对象中的 __proto__ 就是灰色的不能遍历出来 就是设置了 enumerable = false
+    value: 张三,
+    set() {},  赋值触发
+    get() {}   取值触发
+} );
+
+
+// 将对象简化为响应式简化版本
+
+let obj = {
+    name: 'jim',
+    age: 18,
+    gender: '男'
+}
+function defineReactive (target, key, val) { 
+    // 函数内部就是一个局部作用域, 这个 value 就只在函数内使用的变量 ( 闭包 )
+    Object.defineProperty(target, key, {
+        configurable: true,
+        enumerable: true,
+        get () {
+            console.log(`读取 obj 的${key}`)
+            return val
+        },
+        set (newVal) {
+            console.log(`设置 obj 的 ${key}, 值为${newVal}`)
+            val = newVal
+        }
+    })
+}
+Object.keys(obj).forEach(key => {
+    defineReactive(obj, key, obj[key])
+})
+
+
+```
+
+### 函数的拦截 (在函数原有的基础上增加额外的操作 拓展数组的 push pop...)
+
+```js
+// 这个就是在函数原有的基础上增加额外的操作: 函数的拦截
+// 1. 使用一个临时的函数名存储函数
+// 2. 重新定义原来的函数
+// 3. 定义扩展的功能
+// 4. 调用临时的那个函数
+
+function func() {
+    console.log( '原始的功能' );
+}
+
+// 1
+let _tmpFn = func;
+
+// 2
+func = function () {
+    // 4
+    _tmpFn();
+
+    // 3
+    console.log( '新的扩展的功能' );
+
+};
+
+
+func(); // 1. 打印出 原始的功能
+        // 2. 打印出 新的扩展功能
+// 一定要克制，函数拦截侵入太强，使用不当或者过度使用，会导致问题很难追踪，另外代码阅读体验很差！！！
+```
+### 源码规则习惯
+- $ 开头的是只读数据
+- _   开头的是私有数据
+
+### 发布订阅模式(实质就是事件模型)
 
 ### Vue 的使用步骤
 
