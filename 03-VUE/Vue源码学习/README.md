@@ -35,7 +35,7 @@
 │   │   ├── components -------------------- 包含抽象出来的通用组件
 │   ├── server ---------------------------- 包含服务端渲染(server-side rendering)的相关代码
 │   ├── platforms ------------------------- 包含平台特有的相关代码
-│   ├── sfc ------------------------------- 包含单文件组件(.vue文件)的解析逻辑，用于vue-template-compiler包
+│   ├── sfc ------------------------------- 包含单文件组件(.vue文件)的解析逻辑，用于vue-template-compiler包 (和 vue cli 相关)
 │   ├── shared ---------------------------- 包含整个代码库通用的代码
  ```
 
@@ -277,10 +277,33 @@ proxy( 实例, '_properties', 属性名 )
 
 Watcher 会有一些方法: 
 
-- get() 用来进行**计算**或**执行**处理函数
+- get() 用来进行**计算**或**执行**处理函数(组件中的 compintant 和 watcher)
 - update() 公共的外部方法, 外部使用都调用该方法 该方法会触发内部的 run 方法
 - run() 运行, 用来判断内部是使用异步运行(浏览器)还是同步运行(服务端渲染)等, 这个方法最终会调用内部的 get 方法
 - cleanupDep() 简单理解为清除队列
+
+### 对数组去重
+
+```js
+
+let arr = [ 1, 1, 1, 2, 2, 3, 3, 3 ]; // => [ 1, 2, 3 ]
+
+// 一般的做法
+// let newarr = [];
+// arr.forEach( v => newarr.indexOf( v ) === -1 && newarr.push( v ) ); // indexOf 原本隐含着循环
+
+// 利用 集合 来简化实现 ( ES6 Set )
+let _set = {};
+let _newarr = [];
+arr.forEach( v => _set[ v ] || ( _set[ v ] = true, _newarr.push( v ) ) ) // 减少赋值行为
+// Object.kyes( _set ) // 获得去重后的数组
+
+// { 1: true }
+// { 1: true, 2: true }
+
+// 在网络中有一个终极的算法, 就是如何 "判同"
+
+```
 
 
 
