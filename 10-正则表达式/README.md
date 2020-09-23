@@ -71,10 +71,10 @@ MJ
 MJJ
 MjJJJ
 ```
-- * 匹配0次或者多次
+- *匹配0次或者多次
 - ? 匹配0次或者1次
 - () 分组匹配
-- ?: 不捕获
+- ?: 不捕获(在分组中使用)
 
 ### 分组匹配
 ```
@@ -152,6 +152,51 @@ com
 
 ### 字符串的方法
 - match()
-对字符串进行正
+对字符串进行正则匹配 返回匹配的结果
+```js
+var str = 'hello world'
+undefined
+str.match(/l/)
+=>> ["l", index: 2, input: "hello world", groups: undefined]
+str.match(/l/g)
+=>>["l", "l", "l"]
+str.match(/a/g)
+=>>null
+```
+- search()
+返回第一个满足条件的匹配结果在整个字符串中的位置 , 如果没有任何匹配, 返回 -1
+```js
+var str = 'hello world'
+undefined
+str.search(/l/)
+=>> 2
+str.match(/l/g)
+=>>2
+str.match(/a/)
+=>>-1
+```
+
+- replace()
+可以替换匹配的值, 它接受两个参数,第一个事正则表达式(表示搜索模式), 第二个是匹配的内容(可以是一个回调: 有无数个参数 第一个参数是匹配的串, 之后的是分组的内容 $1, $2, $3 ....)
+```js
+'2019.10.05'.replace(/\./g, '-')
+=>> '2019-10-05'
+
+let data = {
+    name: '小明',
+    message: '消息'
+}
+let str = "<p>{{name}}-{{message}}</p>"
+let exp = /\{\{(.+?)\}\}/g
+let result = str.replace(exp, (a, $1) => {
+    console.log(a)  // {{name}}
+    console.log($1) // name
+    return data[$1] // 返回值就是要替换的
+})
+console.log(str)    // <p>{{name}}-{{message}}</p>
+console.log(result) // <p>小明-消息</p>
+
+```
+
 
 
