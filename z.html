@@ -46,8 +46,25 @@
     // }
     // const a = []
     // a = {}
-    'use strict'
-    const foo = Object.freeze({})
-    foo.prop = 123
+    // 'use strict'
+    // const foo = Object.freeze({})
+    // foo.prop = 123
+    function example () {
+        return [1, 2, 3]
+    }
+    let [a,b,c] = example()
+    console.log(a)
+    console.log(b)
+    console.log(c)
+    function example0 () {
+        return {
+            foo: 1,
+            bar: 2
+        }
+    }
+    let {foo, bar} = example0()
+    console.log(foo)
+    console.log(bar)
+
 </script>
 </html>

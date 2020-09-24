@@ -2,6 +2,7 @@
 Generator 和 async await 相关
 
 # ES6 进阶
+
 ### let 和 const
 #### let
 - 不允许重复声明
@@ -37,13 +38,13 @@ foo.prop = 123  // TypeError: Cannot add property prop, object is not extensible
 - 除了将对象本身冻结，对象的属性也应该冻结, 下面是一个将对象彻底冻结的函数。(递归)
 ```js
 var constantize = (obj) => {
-  Object.freeze(obj);
+  Object.freeze(obj)
   Object.keys(obj).forEach( (key, i) => {
     if ( typeof obj[key] === 'object' ) {
-      constantize( obj[key] );
+      constantize( obj[key] )
     }
-  });
-};
+  })
+}
 ```
 
 
@@ -124,3 +125,78 @@ window.a // 1
 let b = 1;
 window.b // undefined
 ```
+
+### 解构赋值
+#### 赋值不成功 会等于 undefined
+#### 使用默认值: 只有当一个数组成员严格等于undefined，默认值才会生效 null 不可以。
+```
+let [x = 1, y = x] = [];     // x=1; y=1
+let [x = 1, y = x] = [2];    // x=2; y=2
+let [x = 1, y = x] = [1, 2]; // x=1; y=2
+let [x = y, y = 1] = [];     // ReferenceError: y is not defined 还是暂时性死区
+
+var {x = 3} = {};
+x // 3
+
+var {x, y = 5} = {x: 1};
+x // 1
+y // 5
+
+var {x: y = 3} = {};
+y // 3
+
+var {x: y = 3} = {x: 5};
+y // 5
+```
+#### 对象的解构要 注意 模式和变量
+```js
+let obj = {
+  p: [
+    'Hello',
+    { y: 'World' }
+  ]
+};
+
+let { p: [x, { y }] } = obj;
+x // "Hello"
+y // "world"
+// ------注意，上边p是模式，不是变量，因此不会被赋值。如果p也要作为变量赋值，可以写成下面这样。
+let obj = {
+    p: [
+        'Hello',
+        { y: 'world' }
+    ]
+}
+let { p, p: [x, { y }]} = obj
+x // 'Hello'
+y // 'World'
+p // ['Hello', {y: 'World'}]
+```
+#### 用途
+- 变换变量的值
+```js
+let x = 1
+let y = 2
+[x, y] = [y, x]
+```
+- 从函数返回多个值
+```js
+function example () {
+        return [1, 2, 3]
+    }
+    let [a,b,c] = example()
+// -------------------------
+function example0 () {
+    return {
+        foo: 1,
+        bar: 2
+    }
+}
+let {foo, bar} = example0()
+
+```
+
+### 对 String 的拓展
+-  JSON.stringify() 的改造 编码的改进
+- 模板字符串
+- 
