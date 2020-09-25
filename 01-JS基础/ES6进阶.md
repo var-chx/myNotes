@@ -215,3 +215,38 @@ Math.max(...arr) // 200
 - 函数内部没有 arguments 因为没有自己作用域连  
 - this 指向比较清晰 没有自己的 this 他的this 是他的上层
 - 不能使用 new 关键字来实例化对象 就是 箭头函数不能做构造函数
+
+### Symbol 数据类型
+- 原始数据类型 它表示独一无二的值 js的第七种数据类型(null undefined Boolean String Number Object)
+- 用途就是定义对象的私有属性 for循环遍历不到
+```js
+// 声明
+const name0 = Symbol('name')
+const name1 = Symbol('name')
+console.log(name0 === name1) // false
+// 对象中使用
+
+let obj = {
+    [name0]: '令狐冲'
+}
+obj[name0] = '任盈盈'
+// 获取 Symbol 声明的属性 
+Object.getOwnPropertySymbols(obj) // [Symbol(name)]  数组
+Reflect.ownKeys(obj)  // [Symbol(name)]  数组
+  
+```
+
+### set
+- 表示无重复的有序列表
+let abc = new Set()
+// 添加  
+abc.push(1)
+// 重复的忽略 添加不进去
+abc.push(1)
+abc.push(2)
+abc.push('2')
+abc.push([1, 2, 3])
+// 校验
+abc.has(1) // true
+// 删除
+abc.delete(1) true
