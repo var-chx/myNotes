@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container {
+            height: 300px;
+            background-color:pink;
+            text-align: center;
+            font-size: 100px;
+            line-height: 300px;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script src="./underscore.js"></script>
+    <script>
+        function debounce(func, wait) {
+            let timeout = null
+            function debounced () {
+                console.log(this, 123)
+                clearTimeout(timeout)
+                timeout = setTimeout(() => {
+                    console.log(this, 999)
+                }, wait);
+            }
+            return debounced
+        }
+        let count = 0
+        let container = document.querySelector('#container')
+        let doSomeThing = ()=> {
+            console.log(this, 123)
+            container.innerHTML = count++
+        } 
+        // container.onmousemove = _.debounce(doSomeThing, 1000)
+        container.onmousemove = debounce(doSomeThing, 1000)
+
+    </script>
+    
+</body>
+</html>
