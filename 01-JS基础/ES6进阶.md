@@ -199,4 +199,19 @@ let {foo, bar} = example0()
 ### 对 String 的拓展
 -  JSON.stringify() 的改造 编码的改进
 - 模板字符串
-- 
+
+### 扩展运算符
+```js
+const arr = [1, 34, 44, 88, 200, 123]
+
+// 取最大值
+Math.max(12, 49) // 49
+Math.max.apply(null, arr) // 200
+Math.max(...arr) // 200
+```
+
+### 箭头函数 
+- function 函数也是一个对象 但是箭头函数不是对象 它其实就是一个函数的语法糖
+- 函数内部没有 arguments 因为没有自己作用域连  
+- this 指向比较清晰 没有自己的 this 他的this 是他的上层
+- 不能使用 new 关键字来实例化对象 就是 箭头函数不能做构造函数
