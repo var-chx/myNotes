@@ -11,7 +11,6 @@
             text-align: center;
             font-size: 100px;
             line-height: 300px;
-
         }
     </style>
 </head>
@@ -19,25 +18,29 @@
     <div id="container"></div>
     <script src="./underscore.js"></script>
     <script>
+        // 自己实现防抖函数
         function debounce(func, wait) {
             let timeout = null
             function debounced () {
-                console.log(this, 123)
+                console.log(arguments, 9090)
                 clearTimeout(timeout)
                 timeout = setTimeout(() => {
                     console.log(this, 999)
+                    func.apply(this)
                 }, wait);
             }
             return debounced
         }
+
+
         let count = 0
         let container = document.querySelector('#container')
-        let doSomeThing = ()=> {
+        let doSomeThing =  function(){
             console.log(this, 888)
             container.innerHTML = count++
         } 
         // container.onmousemove = _.debounce(doSomeThing, 1000)
-        container.onmousemove = debounce(doSomeThing, 1000)
+        container.onmousemove = debounce(doSomeThing, 300)
 
     </script>
     

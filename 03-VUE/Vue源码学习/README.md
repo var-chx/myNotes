@@ -8,6 +8,34 @@
 
 ### VUE 2.0 和 3.0的区别
 - 核心思想没有变化(响应式原理 设计思想) 主要是一些js的高级语法 让一些写法更加简洁 但本质是相同的
+- Vue3.x改用Proxy替代Object.defineProperty。
+- 因为Proxy可以直接监听对象和数组的变化，并且有多达13种拦截方法。并且作为新标准将受到浏览器厂商重点持续的性能优化。
+- Proxy 与 Object.defineProperty 优劣对比 
+    - Proxy 的优势如下:
+        - Proxy 可以直接监听对象而非属性；
+        - Proxy 可以直接监听数组的变化
+        - Proxy 有多达 13 种拦截方法,不限于 apply、ownKeys、deleteProperty、has 等等是 Object.defineProperty 不具备的；
+        - Proxy 返回的是一个新对象,我们可以只操作新的对象达到目的,而 Object.defineProperty 只能遍历对象属性直接修改；
+        - Proxy 作为新标准将受到浏览器厂商重点持续的性能优化，也就是传说中的新标准的性能红利；
+    - Object.defineProperty 的优势如下:
+        - 兼容性好 支持IE9  而 Proxy 的存在浏览器兼容性问题,而且无法用 polyfill
+### MVVM 理解
+- Model-View-ViewModel 的缩写, Model 代表数据模型, View 代表 UI 组件, ViewModel 就是将 View 和 Model 关联起来
+- 数据会绑定到viewModel层并自动将数据渲染到页面中，视图变化的时候会通知viewModel层更新数据
+
+### 响应式数据原理
+- Vue 数据双向绑定主要是指：数据变化更新视图，视图变化更新数据。其中，View变化更新Data，可以通过事件监听(input textare事件)的方式来实现，所以 Vue数据双向绑定的工作主要是如何根据Data变化更新View。
+- 简述：
+    - 当你把一个普通的 JavaScript 对象传入 Vue 实例作为 data 选项，Vue 将遍历此对象所有的 property，并使用 Object.defineProperty 把这些 property 全部转为 getter/setter。
+    - 这些 getter/setter 对用户来说是不可见的，但是在内部它们让 Vue 能够追踪依赖，在 property 被访问和修改时通知变更。
+    - 每个组件实例都对应一个 watcher 实例，它会在组件渲染的过程中把“接触”过的数据 property 记录为依赖。之后当依赖项的 setter 触发时，会通知 watcher，从而使它关联的组件重新渲染。
+- 深入理解: 
+    - 监听器 Observer：对数据对象进行遍历，包括子属性对象的属性，利用 Object.defineProperty() 对属性都加上 setter 和 getter。这样的话，给这个对象的某个值赋值，就会触发 setter，那么就能监听到了数据变化。
+    - 解析器 Compile：解析 Vue 模板指令，将模板中的变量都替换成数据，然后初始化渲染页面视图，并将每个指令对应的节点绑定更新函数，添加监听数据的订阅者，一旦数据有变动，收到通知，调用更新函数进行数据更新。
+    - 订阅者 Watcher：Watcher 订阅者是 Observer 和 Compile 之间通信的桥梁 ，主要的任务是订阅 Observer 中的属性值变化的消息，当收到属性值变化的消息时，触发解析器 Compile 中对应的更新函数。每个组件实例都有相应的 watcher 实例对象，它会在组件渲染的过程中把属性记录为依赖，之后当依赖项的 setter 被调用时，会通知 - - watcher 重新计算，从而致使它关联的组件得以更新——这是一个典型的观察者模式
+    - 订阅器 Dep：订阅器采用 发布-订阅 设计模式，用来收集订阅者 Watcher(订阅者来自wathert 存在 Dep中)，对监听器 Observer 和 订阅者 Watcher 进行统一管理(Observer通知变化给 Dep, Dep 再通知 Watcher 去更新视图)。
+
+    ![Image](./assets/数据劫持-发布订阅者.jpg)
 
 ### 项目目录结构(大佬们都说VUE的结构很漂亮)
  ```
@@ -67,7 +95,7 @@
 }
 ```
 - 相互转换
-    -  思想和深拷贝类似 深度遍历(递归 while循环) 
+    - 思想和深拷贝类似 深度遍历(递归 while循环) 
     - 递归遍历DOM 生成 virtaul DOM 
     - 递归遍历 virtaul DOM 生成 DOM
     - Vue 的源码中使用的是 栈结构 使用栈存储父元素来实现递归生成 这个操作功能和递归完全一样 
