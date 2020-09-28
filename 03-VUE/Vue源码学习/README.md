@@ -359,6 +359,7 @@ arr.forEach( v => _set[ v ] || ( _set[ v ] = true, _newarr.push( v ) ) ) // 减�
 ## 参考
 + [Vue2.1.7源码学习](http://hcysun.me/2017/03/03/Vue%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/)
 + [前端基础进阶系列](https://www.jianshu.com/p/cd3fee40ef59)
++ [Vue的MVVM实现原理](https://juejin.im/post/6844904183938678798)
 + [函数式编程](https://llh911001.gitbooks.io/mostly-adequate-guide-chinese/content/)
 
 
