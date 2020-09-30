@@ -1,5 +1,11 @@
 # Django
 
+## MVC 的理解
+- MVC(Model View Controller) 是模型(model)－视图(view)－控制器(controller)
+- model 主要处理与数据库交互的东西
+- view 用于封装结果 内嵌了模板引擎 实现数据的动态展示
+- controller 主要用于 接受 get post 请求 处理业务逻辑 与 model 和 view 交互 返回结果
+
 ## 创建项目
 - 安装 Django : 
 ```

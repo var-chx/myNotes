@@ -40,9 +40,90 @@
             container.innerHTML = count++
         } 
         // container.onmousemove = _.debounce(doSomeThing, 1000)
-        container.onmousemove = debounce(doSomeThing, 300)
+        // container.onmousemove = debounce(doSomeThing, 300)
+        function isPlalindrome (word) {
+            let s = []
+    // Array.prototype.forEach.call(word, item => {
+    //     s.push(item)
+    // })
+    // let rword = ''
+    // while(s.length > 0) {
+    //     rword += s.pop()
+    // }
+    // console.log(word === rword)
+    // return (word === rword)
+}
+// isPlalindrome('123321')
 
-    </script>
+// function isPlalindrome0 (word) {
+//     let tempArr = word.split('')
+//     return (tempArr.join('') === tempArr.reverse().join(''))
+// }
+// console.log(isPlalindrome0('12321'))
+
+function bubbleSort (arr) {
+    arr.forEach((item, index) => {
+        for (let i = 0; i < arr.length - index; i ++) {
+            if (arr[i] > arr[i + 1]) {
+                [ arr[i], arr[i+1] ] = [ arr[i + 1], arr[i] ]
+            }
+        }
+    })
+    console.log(arr)
+}
+// bubbleSort([1,4,2,4,6,7])
+
+function quickSort (arr) {
+    if (arr.length <= 1) return arr // 递归的结束条件
+    
+    let pivotIndex = Math.floor(arr.length / 2)
+    let pivot = arr.splice(pivotIndex, 1)[0] // 在数组中取出中间值
+    let left = []
+    let right = []
+    arr.forEach (item => {
+        if (item < pivot) {
+            left.push(item)
+        } else {
+            right.push(item)
+        }
+    })
+    return quickSort(left).concat(pivot, quickSort(right))
+
+
+}
+
+// console.log(quickSort([1,4,2,100,4,6,7]))
+
+// function selectSort (arr) {
+//     arr.forEach((item, index) => {
+//         let min = arr[index]
+//         for(let i = 1; i < arr.length; i ++) {
+//             if (min > arr[i]) {
+//                 min = arr[i]
+//             }
+//         }
+//         arr[index] = min
+//     })
+//     return arr
+// }
+// console.log(quickSort([1,4,900,2,100,4,6,7]))
+
+function insertSort (arr) {
+    let sortArr = []
+    arr.forEach((item, index) => {
+        console.log(item)
+        let min = arr[0]
+        for (let i = 1; i< arr.length; i++ ) {
+            if (arr[i] < min) {
+                
+            } 
+        }
+        sortArr.push(min)
+    })
+    console.log(sortArr)
+}
+insertSort([1,4,900,2,100,4,6,7, 999])
+</script>
     
 </body>
 </html>
