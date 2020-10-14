@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let arr = [1, 3, 2, 2.5, 5, 23, 77, 4, 300, 400, 88]
+    function sleepSort(arr) {
+        let result = []
+        arr.forEach((item) => {
+            setTimeout(() => {
+                result.push(item)
+                if (result.length == arr.length) {
+                    console.log(result)
+                }
+            }, item);
+        })
+    }
+    sleepSort(arr)
+
+    function insertSort (arr) {
+        for ( let i = 0; i <= arr.length; i ++) {
+            for (let j = i; j > 0 && arr[j] < arr[j-1]; j--) { // 每次循环都从 排好序部分最大的开始
+                [arr[j-1], arr[j]] = [arr[j], arr[j-1]]
+            }
+        }
+        return arr
+    }
+    console.log(insertSort(arr))
+</script>
+</html>
