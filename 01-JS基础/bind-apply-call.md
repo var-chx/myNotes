@@ -74,3 +74,11 @@ xw.say.bind(xh,"实验小学","六年级")();
 ```js
 xw.say.bind(xh)("实验小学","六年级");
 ```
+
+### 字符串借用 数组的 方法
+```
+let word = "sdfasfsdf"
+Array.prototype.forEach.call(word, item => {
+        s.push(item)
+    })
+```
