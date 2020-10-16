@@ -188,6 +188,7 @@ DATABASES = {
 }
 
 ```
+### 关于查询
 - get函数
 ```
 返回一条且只能是一条数据
@@ -226,7 +227,7 @@ from django.db.models import Q
 BookInfo.objects.filter(id__gt = 3, bread__=30)
 
 ```
-- 聚合函数
+- 聚合函数 aggregate
 ```
 sum count avg max min
 可以查询 某个阅读量的总和
@@ -236,4 +237,33 @@ from django.db.models import Count
 BookInfo.objects.all().aggregate(Count('id'))
 返回值是一个字典 {id__conut: 5}
 ```
+### 查询集
+- all, filter, exclude, order_by调用这些函数会产生一个查询集，QuerySet类对象可以继续调用上面的所有函数。
+- 特性
+    1. 惰性查询：只有在实际使用查询集中的数据的时候才会发生对数据库的真正查询。
+    2. 缓存：当使用的是同一个查询集时，第一次使用的时候会发生实际数据库的查询，然后把结果缓存起来，之后再使用这个查询集时，使用的是缓存中的结果。
+- 取出查询集的第一条数据
+```
+b[0]	如果b[0]不存在，会抛出IndexError异常
+b[0:1].get()	如果b[0:1].get()不存在，会抛出DoesNotExist异常。
 
+```
+- exists: 判断一个查询集中是否有数据。True False
+
+### 模型类之间的关系
+【参考】https://docs.djangoproject.com/zh-hans/3.0/topics/db/examples/
+- 一对多
+例: 图书类-英雄类
+models.ForeignKey() 定义在多的类中
+```py
+```
+
+
+
+
+
+
+
+
+## 参考
+1. [Django笔记](https://www.cnblogs.com/chenxi188/category/1630372.html)
