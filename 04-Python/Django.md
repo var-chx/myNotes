@@ -105,6 +105,26 @@ from testName.models import BookInfo
 
 ```
 
+## 后台管理
+- 语言和时区本地化 修改 settings.py 文件
+```
+# LANGUAGE_CODE = 'en-us'
+
+LANGUAGE_CODE = 'zh-hans'
+
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/shanghai'
+```
+- 创建管理员
+```
+python3 manage.py createsuperuser
+
+```
+- 注册模型类
+    - 在 应用下的 admin.py 中注册
+    - 想要显示各个字段  需要 自定义模型管理类
+    list_display = ['id', 'btitle']
+
 
 # 配置
 - 模板路径
@@ -137,7 +157,7 @@ MIDDLEWARE = [
 ## 路由关系
 - url -> 函数
 
-## 视图函数
+## 视图函数 wiews.py
 ```
 def index(request): 
 
@@ -155,4 +175,65 @@ def index(request):
 ```
 
 ## 模板语法 略... 
+
+## Django 中使用 mysql 数据库
+
+- 修改 settings.py
+```
+DATABASES = {
+    'default': {
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+```
+- get函数
+```
+返回一条且只能是一条数据
+BookInfo.objects.get(id=1)
+```
+- all 函数
+```
+返回所有数据
+```
+- filter 函数
+```
+返回满足条件的数据
+例：查询书名中包含‘传’的图书。 BookInfo.objects.filter(btitle__contains=‘传’)
+同理的开头结尾用__startwith,__endwith
+```
+- order_by 函数
+```
+对查询结果进行排序
+```
+- F 对象
+```
+用于类属性 之间的比较
+使用前先导入
+from django.db.models import F
+使用场景:
+1. 查询图书阅读量大于评论量的信息
+2. 插叙图示阅读量大于2倍评论量的信息
+```
+- Q 对象
+```
+用于查询时条件的 逻辑关系 not , and , or。可以对Q对象进行 ~ & | 的操作。
+使用前先导入
+from django.db.models import Q
+使用场景:
+1. 查询id大于3 且 阅读量大于 30 的信息
+BookInfo.objects.filter(id__gt = 3, bread__=30)
+
+```
+- 聚合函数
+```
+sum count avg max min
+可以查询 某个阅读量的总和
+使用场景
+1. 统计所有图书的数目
+from django.db.models import Count
+BookInfo.objects.all().aggregate(Count('id'))
+返回值是一个字典 {id__conut: 5}
+```
 
