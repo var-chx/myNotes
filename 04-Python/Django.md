@@ -258,7 +258,32 @@ models.ForeignKey() 定义在多的类中
 ```py
 ```
 
+## 管理器(manager)
 
+问：BookInfo.objects.all()->objects是一个什么东西呢？
+
+答：objects是Django帮我自动生成的管理器对象，通过这个管理器可以实现对数据的查询。
+objects是models.Manger类的一个对象。自定义管理器之后Django不再帮我们生成默认的objects管理器。
+
+### 自定义管理器类的使用场景
+- 改变查询的结果集
+    - 比如调用BookInfo.books.all()返回的是没有删除的图书的数据。
+- 添加额外的方法
+    - 
+
+
+## 静态文件
+
+## 中间件
+- 概念
+    - 是介于request与response处理之间的一道处理过程， 中间件位于web服务端与url路由层之间
+- 作用
+    - 如果你想修改请求，例如被传送到view中的HttpRequest对象。 或者你想修改view返回的HttpResponse对象，这些都可以通过中间件来实现。
+    - 可能你还想在view执行之前做一些操作，这种情况就可以用 middleware来实现。
+- 使用中间件:
+    - 新建 middleware.py
+    - 在其中定义 中间件类 process_view 函数  在视图函数调用前 触发
+    - 去 settings.py 中去注册
 
 
 
