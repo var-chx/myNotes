@@ -38,6 +38,7 @@
     > -v 目录映射 最好做目录映射 在宿主机上做修改 然后共享到容器上
     > -d 创建守护式容器在后台运行
     > -p 表示端口映射 
+    > -rm 容器 stop时 容器会被清理 (很明显不能和 -d 一起使用)
 - 交互式容器 docker run -it --name=mycentos7 centos /bin/bash
     - 已交互式方式创建并启动容器 启动完成后 直接进入当前容器 
     - 注意:
@@ -49,8 +50,12 @@
     > 守护式容器启动后会在后台一直运行 执行 exit 命令退出 也不会停止容器
 
 ### 容器的操作
+- 查看已经创建的容器 docker ps -a
+- 查看正在运行的容器 docker ps
 - 停止容器 docker stop 名称(|id)
 - 启动容器 docker start 名称(|id)
+- 删除容器 docker rm 9ocd122ds
+- 删除所有容器 docker rm $(docker ps -a -q)
 - 文件拷贝 
     - 把当前文件夹的Mac.md 拷贝到容器 docker cp Mac.md mycentos2:/ 
     - 把容器中的文件复制到 当前目录 docker cp mycentos2:/abc.js ./

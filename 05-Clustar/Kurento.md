@@ -51,7 +51,7 @@
 - apt-get install
 
 ## 开发方式
-- java
+- java (需要安装 Java 的 JDK 和 Maven)
 - bowser JavaScript(不需要服务器 直接运行在浏览器)
 - Node.js
 
