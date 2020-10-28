@@ -72,14 +72,40 @@ cd kurento-tutorial-node/kurento-hello-world
 git checkout master
 npm install
 cd static
-bower install --allow-root  (npm install -g bower 也是一个包管理工具)
+bower install --allow-root  (前提 : npm install -g bower 也是一个包管理工具)
 cd ..
 npm start
 ```
 
+3. dome 理解
+- 页面: 两个h5视频标签 一个用于本地视频的捕获 (本地流); 一个用来显示媒体服务器发送到客户端的远程流
+- 它遵循客户机-服务器体系结构。在客户端，逻辑是用JavaScript实现的。在服务器端，我们使用Node.js应用服务器使用Kurento JavaScript客户端API来控制Kurento媒体服务器的功能
+- 这个演示的高层架构是三层的。为了与这些实体通信，使用了两个WebSockets。首先，在客户端和应用服务器之间创建一个WebSocket来实现一个定制的信令协议。其次，另一个WebSocket用于执行Kurento Javascript客户端和Kurento媒体服务器之间的通信。这种通信使用Kurento协议进行。
+
+
+
+
+
+
+
+
+
 ## 场景: 一对多
 - 一个视频广播web应用程序的实现
 
+
+## 使用视频流
+https://github.com/lulop-k/kurento-rtsp2webrtc
+
+回看的视频流
+rtsp://player:1234qwer@172.16.0.168:554/Streaming/tracks/201?transportmode=unicast&starttime=20200429t063818z&endtime=20200429t063828z
+
+直播视频流
+rtsp://admin:Xingyun6666@172.16.0.168:554/Streaming/Channels/102?transportmode=multicast
+
+&starttime=20201026t063818z&endtime=20201027t063828z
+
+## 特性
 
 
 
