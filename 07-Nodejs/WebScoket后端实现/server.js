@@ -38,16 +38,30 @@
 // });
 
 
-var express = require('express');
-var app = express();
-var expressWs = require('express-ws')(app);
-var util = require('util');
-app.ws('/ws', function(ws, req) {
-  util.inspect(ws);
-  ws.on('message', function(msg) {
-    console.log('_message');
-    console.log(msg);
-    ws.send('echo:' + msg);
-  });
-})
-app.listen(8000);
+// var express = require('express');
+// var app = express();
+// var expressWs = require('express-ws')(app);
+// var util = require('util');
+// app.ws('/ws', function(ws, req) {
+//   util.inspect(ws);
+//   ws.on('message', function(msg) {
+//     console.log('_message');
+//     console.log(msg);
+//     ws.send('echo:' + msg);
+//   });
+// })
+// app.listen(8000);
+
+var path = require("path");
+
+// 格式化路径
+console.log('normalization : ' + path.normalize('/test/test1//2slashes/1slash/tab/..'));
+
+// 连接路径(注意理解 ../)
+console.log('join path : ' + path.join('/test', 'test1', '../2slashes/1slash', 'tab', '..'));
+
+// 转换为绝对路径
+console.log('resolve : ' + path.resolve('1.js'));
+
+// 路径中文件的后缀名
+console.log('ext name : ' + path.extname('main.js'));
