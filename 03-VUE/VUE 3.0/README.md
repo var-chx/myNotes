@@ -33,10 +33,10 @@
 ### 2.1 Vue 2.0 响应式原理 
 - Vue 2.0 中使用 Object.defineProperty 方法实现数据的响应
 ```js
-var o = {}; 
+var o = {} 
     
 // 给 o 提供属性
-o.name = '张三';
+o.name = '张三'
 
 // 等价于
 Object.defineProperty( o, 'name', {
@@ -46,7 +46,7 @@ Object.defineProperty( o, 'name', {
     value: 张三,
     set() {},  赋值触发
     get() {}   取值触发
-} );
+} )
 ```
 - 缺点
     - 无法监测到对象属性的动态添加和删除
@@ -64,7 +64,35 @@ Object.defineProperty( o, 'name', {
 - 缺点
     - 对低版本不支持 IE 11
     - vue 3.0 会出一个针对 IE 11 的特殊版本来支持 
-    
+- Vue 3.0 中使用 proxy 方法实现数据的响应
+```js
+var target = {
+   name: 'poetries'
+}
+var logHandler = {
+    get: function(target, key) {
+        console.log(`${key} 被读取`)
+        return target[key]
+    },
+    set: function(target, key, value) {
+        console.log(`${key} 被设置为 ${value}`)
+        target[key] = value
+    },
+    deleteProperty(targer, key) {
+        console.log(`监测到删除${key}`)
+        return delete target[key]
+    }
+}
+ var targetWithLog = new Proxy(target, logHandler)
+ 
+ targetWithLog.name // 控制台输出：name 被读取
+ targetWithLog.name = 'others' // 控制台输出：name 被设置为 others
+ 
+ console.log(target.name) // 控制台输出: others
+``` 
+
+## 3. 创建 3.0 项目
+
 
 
 
