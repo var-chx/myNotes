@@ -43,33 +43,36 @@ ws.onclose = function() {
 };
 ```
 - **在服务端** (这里的例子是 node服务器) 需要先引入
-```
-// 在 http-server 中使用 npm i ws
-var http = require('http');
-var WebSocket = require('ws');
-var server = http.createServer();
-var wss = new WebSocket.Server({server});
-wss.on('connection', (ws) => {
-    console.log('链接成功！')
-    ws.on('message', (data) => {
-        /**
-         * 把消息发送到所有的客户端
-         * wss.clients获取所有链接的客户端
-         */
-        console.log(typeof(wss.clients), 9090)
-        wss.clients.forEach(function each(client) {
-            console.log(1234)
-            client.send(data);
+
+    - 在 http-server 中使用 npm i ws
+    ```js
+    var http = require('http');
+    var WebSocket = require('ws');
+    var server = http.createServer();
+    var wss = new WebSocket.Server({server});
+    wss.on('connection', (ws) => {
+        console.log('链接成功！')
+        ws.on('message', (data) => {
+            /**
+             * 把消息发送到所有的客户端
+             * wss.clients获取所有链接的客户端
+             */
+            console.log(typeof(wss.clients), 9090)
+            wss.clients.forEach(function each(client) {
+                console.log(1234)
+                client.send(data);
+            });
         });
     });
- });
-server.listen(8000, function listening() {
-    console.log('服务器启动成功！');
-});
+    server.listen(8000, function listening() {
+        console.log('服务器启动成功！');
+    });
+    ```
 
 
 
-// 在 express中使用 npmi express-ws
+    - 在 express中使用 npmi express-ws
+```js
 var express = require('express');
 var app = express();
 var expressWs = require('express-ws')(app);
@@ -83,9 +86,10 @@ app.ws('/ws', function(ws, req) {
   });
 })
 app.listen(8000);
+```
 
-
-// 纯 WebSocket 服务 npm i nodejs-websocket
+    - 纯 WebSocket 服务 npm i nodejs-websocket
+```
 var ws = require('nodejs-websocket');
 var server = ws.createServer(function(socket){
 // 事件名称为text(读取字符串时，就叫做text)，读取客户端传来的字符串
