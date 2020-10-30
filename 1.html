@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var ws = new WebSocket('ws://localhost:8000')
+    console.log(ws)
+    ws.onopen = () => {
+        ws.send('23')
+    }
+    // 接收服务端数据时触发事件
+ws.onmessage = function(evt) {
+  var received_msg = evt.data;
+  alert('数据已接收...');
+};
+</script>
+</html>
