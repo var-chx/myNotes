@@ -1,24 +1,4 @@
-// const http = require('http')
-// const WebSocket = require('ws')
-// const hostname = '127.0.0.1'
-// const port  = 3300
-// console.log(port)
-// const server = http.createServer((req, res) => {
-//     res.statusCode = 200
-//     res.setHeader('content-type', 'text/plain')
-//     res.end('Hello world')
-// })
-// server.listen(port, hostname, () => {
-//     console.log('127.0.0.1:3300')
-//     const wss = new WebSocket.Server({ noServer: true })
-//     console.log(wss)
-//     wss.on('connection', (ws) => {
-//         console.log('222222222')
-//         ws.on('message', (msg) => {
-//             console.log(msg)
-//         })
-//     })
-// })
+
 
 // var ws = require('nodejs-websocket');
 // var server = ws.createServer(function(socket){
@@ -32,28 +12,42 @@
 //     });
 // }).listen(3300); 
 
+
+
+
+// var http = require('http');
+// var WebSocket = require('ws');
+// var server = http.createServer();
+// var wss = new WebSocket.Server({server});
+// wss.on('connection', (ws) => {
+//     console.log('链接成功！')
+//     ws.on('message', (data) => {
+//         /**
+//          * 把消息发送到所有的客户端
+//          * wss.clients获取所有链接的客户端
+//          */
+//         console.log(typeof(wss.clients), 9090)
+//         wss.clients.forEach(function each(client) {
+//             console.log(1234)
+//             client.send(data);
+//         });
+//     });
+//  });
+// server.listen(8000, function listening() {
+//     console.log('服务器启动成功！');
+// });
+
+
 var express = require('express');
-var http = require('http');
-var WebSocket = require('ws');
-
 var app = express();
-app.use(express.static(__dirname));
-
-var server = http.createServer(app);
-var wss = new WebSocket.Server({server});
- 
-wss.on('connection', function connection(ws) {
-    console.log('链接成功！');
-    ws.on('message', function incoming(data) {
-        /**
-         * 把消息发送到所有的客户端
-         * wss.clients获取所有链接的客户端
-         */
-        wss.clients.forEach(function each(client) {
-            client.send(data);
-        });
-    });
- });
-server.listen(8000, function listening() {
-    console.log('服务器启动成功！');
- });
+var expressWs = require('express-ws')(app);
+var util = require('util');
+app.ws('/ws', function(ws, req) {
+  util.inspect(ws);
+  ws.on('message', function(msg) {
+    console.log('_message');
+    console.log(msg);
+    ws.send('echo:' + msg);
+  });
+})
+app.listen(8000);

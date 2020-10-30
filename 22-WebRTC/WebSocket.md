@@ -44,9 +44,73 @@ ws.onclose = function() {
 ```
 - **在服务端** (这里的例子是 node服务器) 需要先引入
 ```
-// 先下载 npm i ws -S  https://www.npmjs.com/package/ws
-const WebSocket = require('ws');
-const wss = new WebSocket.Server({ noServer: true });
+// 在 http-server 中使用 npm i ws
+var http = require('http');
+var WebSocket = require('ws');
+var server = http.createServer();
+var wss = new WebSocket.Server({server});
+wss.on('connection', (ws) => {
+    console.log('链接成功！')
+    ws.on('message', (data) => {
+        /**
+         * 把消息发送到所有的客户端
+         * wss.clients获取所有链接的客户端
+         */
+        console.log(typeof(wss.clients), 9090)
+        wss.clients.forEach(function each(client) {
+            console.log(1234)
+            client.send(data);
+        });
+    });
+ });
+server.listen(8000, function listening() {
+    console.log('服务器启动成功！');
+});
+
+
+
+// 在 express中使用 npmi express-ws
+var express = require('express');
+var app = express();
+var expressWs = require('express-ws')(app);
+var util = require('util');
+app.ws('/ws', function(ws, req) {
+  util.inspect(ws);
+  ws.on('message', function(msg) {
+    console.log('_message');
+    console.log(msg);
+    ws.send('echo:' + msg);
+  });
+})
+app.listen(8000);
+
+
+// 纯 WebSocket 服务 npm i nodejs-websocket
+var ws = require('nodejs-websocket');
+var server = ws.createServer(function(socket){
+// 事件名称为text(读取字符串时，就叫做text)，读取客户端传来的字符串
+　  var count = 1;
+    socket.on('text', function(str) {
+　　     // 在控制台输出前端传来的消息　　
+        console.log(str);
+        //向前端回复消息
+        socket.sendText('服务器端收到客户端端发来的消息了！' + count++);
+    });
+}).listen(3300); 
+
+// 三种情况对应的客户端代码
+var ws = new WebSocket('ws://localhost:8000')
+<!-- var ws = new WebSocket('ws://localhost:8000/ws') -->
+console.log(ws)
+ws.onopen = () => {
+    ws.send(23)
+}
+// 接收服务端数据时触发事件
+ws.onmessage = (evt) => {
+    var received_msg = evt.data;
+    console.log(received_msg)
+    alert('数据已接收...');
+};
 ```
 
 - WebSocket 代理: 如果把 WebSocket 的通信看成是电话连接，Nginx 的角色则像是电话接线员，负责将发起电话连接的电话转接到指定的客服。
