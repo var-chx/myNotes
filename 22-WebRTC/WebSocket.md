@@ -18,7 +18,8 @@ var ws = new WebSocket('ws://localhost:9998/echo');
 - 具有 属性 事件 方法
     - 属性:
 
-## WebSocket 客户端
+## WebSocket 客户端
+
 - **在客户端** 没有必要为 WebSocket 使用 js库
 ```js
 // 初始化一个 WebSocket 对象
