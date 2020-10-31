@@ -118,7 +118,71 @@ npm i
 ```
 > 4. [有了Vite , 还需要 webpack吗?](https://zhuanlan.zhihu.com/p/150083887)
 
-## Composition API 的使用
+## 4. Composition API 的使用
+### 4.1 Compositon API (3.0) VS option API (2.0) 
+- 1. Option API 选项 API 
+    - 1. 优点是容易学和使用 代码有明确的书写位置
+    - 2. 缺点是相似的逻辑不易复用 尤其是在大型项目中
+    - 3. 可以通过 mixins 提取相同的逻辑 但是容易发生命名冲突且来源不清晰
+- 2. Composition API 组合 API
+    - 1. 它是根据功能逻辑来组织代码的 一个功能所有的api放在一起
+    - 2. 即便项目很大 功能很多 都能够快速定位到该功能的所有api
+    - 3. 提供了代码可读性 和 可维护性
+- 3. Vue 3.0 中推荐使用 composition api 同时也保留了 option api
+### 4.2 setup
+- Setup 函数是一个新的组件选项, 作为 composition API 的起点
+- 从生命周期的角度讲 setup 会在 beforeCreate 钩子前执行
+- 此时 没有 this
+```js
+export default {
+    setup () {
+        console.log('setup 执行了')
+        console.log(this) // undefined
+    }
+}
+``` 
+### 4.3 reactive
+- Reactive 函数接受一个普通的对象 会返回该对象响应式的代理
+```js
+import { reactive } from 'vue'
+export default {
+    setup () {
+        // setup 需要返回值 返回的数据才能在模板中使用
+        // 普通的返回对象没有响应式  需要 reactive 包裹
+        const car = reactive({
+            brand: '宝马',
+            price: 2000
+        })
+        return {
+            car
+        }
+    }
+}
+```
+
+### 4.4 ref 
+- ref 函数接收一个简单类型 返回一个响应式对象
+- 这个对象只有一个 value 属性
+- 在模板中会自动解套 不需要 value js中需要 .value
+```js
+<template>
+    <div>
+        <p>{{ money }}</p>
+        <button @click="money++">修改</button>
+    </div>
+</template>
+import { ref } from 'vue'
+export default {
+    setup () {
+        let money = ref(100)
+        money ++ 
+        return {
+            money
+        }
+    }
+}
+```
+
 
 
 
