@@ -92,7 +92,33 @@ var logHandler = {
 ``` 
 
 ## 3. 创建 3.0 项目
+### 3.1 用最新的脚手架 直接创建  第一步会让你选 创建 vue 2 还是 3  的项目
+```sh
+# 升级最新的脚手架
 
+sudo npm update -g @vue/cli
+vue -V
+vue create hello-vue3
+# select vue 3 preset
+
+```
+### 3.2 使用 vite
+
+> 1. Vite 是一个由原生 ESM(ES6标准的模块化规范) 驱动的 web开发构建工具 在开发环境下基于浏览器原生 ES imports 开发 在生产环境下基于 Eollup 打包
+> 2. Vite 目前仅支持 vue 3.0 项目 不支持 2.0
+> 3. Vite 基本使用
+```sh
+
+npm init vite hello-vue3 
+# OR yarn create vite-app hello-vue3
+
+cd hello-vue3
+npm i
+
+```
+> 4. [有了Vite , 还需要 webpack吗?](https://zhuanlan.zhihu.com/p/150083887)
+
+## Composition API 的使用
 
 
 
