@@ -200,7 +200,7 @@ export defaule {
             name: '查娜'
         })
         return {
-            ...refs(state)
+            ...toRefs(state)
         }
     }
 }
@@ -409,6 +409,21 @@ setup (props) {
 }
 props: {
     money: Number
+}
+```
+
+## 定义方法
+```js
+import {}
+setup () {
+
+    const delTodo = (id) => {
+        console.log('del', id)
+    }
+    // 只要模板中使用的  不管是属性还是方法 都要返回
+    return {
+        deltode
+    }
 }
 ```
 
