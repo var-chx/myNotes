@@ -312,7 +312,105 @@ export default {
   }
 }
 ```
+### 4.9 Lifecycle Hooks
+- 只能在 setup() 中使用
+- 3.0 对比 2.0
+    - beforeCreate -> use setup()
+    - created -> use setup()
+    - beforeMount -> onBeforeMount
+    - mounted -> onMounted
+    - beforeUpdate -> onBeforeUpdate
+    - updated -> onUpdated
+    - beforeDestroy -> onBeforeUnmount
+    - destroyed -> onUnmounted
+    - activated -> onActivated
+    - deactivated -> onDeactivated
+    - errorCaptured -> onErrorCaptured
+```js
+import { onMounted } from 'vue'
+export default {
+    setup () {
+        onMounted(() => {
+            console.log('加载好了')
+        })
+        return {
 
+        }
+    }
+}
+```
+
+### 4.10依赖注入 inject 和 provide
+- 实现组件之间的通讯
+- 3.0 中 的 provide 和 inject 可以用于跨多级组件进行通讯
+```js
+// 父组件 provide 提供
+setup () {
+    const moeny = ref(100)
+    const changeMoeny = (val) => {
+        moeny.value = val
+    }
+    provide('money', moeny)
+    // 当然而已可以提供方法
+    provide('changeMoeny', changeMoeny)
+}
+// 子组件或者孙子组件 inject 注入
+setup () {
+    const money = inject('moeny')
+    const changeMoeny = inject('changeMoeny')
+    return {
+        money
+    }
+}
+
+```
+
+### 4.11 模板 refs 的使用
+```js
+<template>
+    <h1 ref="hRef">你好啊哈哈</h1>
+</template>
+<script>
+import { ref } from 'vue'
+export default {
+    setup () {
+        // 创建一个空的 ref
+        const hRef = ref(null)
+        onMounted(() => {
+            console.log(hRef.value.innerHTML) // 你好啊哈哈
+        })
+    }
+}
+</script>
+```
+
+
+##  5 注册组件 和以前一样 注意和 setup 同级别
+```
+import Demo from './demo'
+export default {
+    components: {
+        Demo
+    }
+    setup () {
+
+    }
+}
+```
+
+## 参数定义和接收
+```js
+// 父组件定义
+<Demo :moeny="moeny"></Demo>
+
+// 子组件接收
+setup (props) {
+    consolg.log(props)
+}
+props: {
+    money: Number
+}
+```
 
 
 

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { ref, reactive, toRefs, watch } from 'vue'
+import { ref, reactive, toRefs, watch, onMounted } from 'vue'
 export default {
   setup () {
     let money = ref(100)
@@ -53,6 +53,10 @@ export default {
     }, {
         deep: true
     }) 
+    onMounted(() => {
+        console.log(123)
+        console.log(document.querySelector('h1'))
+    })
     return {
         money,
         ...toRefs(state)
