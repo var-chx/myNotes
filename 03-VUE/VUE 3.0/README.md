@@ -188,7 +188,131 @@ export default {
 - Reactive 的响应式功能是赋予对象的, 但是如果给对象解构或者展开的时候, 就会让数据丢失响应的能力
 - 使用 toRefs 可以保证该对象展开的每一个属性都是响应式的
 ```js
+import { refs, reactive } from 'vue'
+export defaule {
+    setup () {
+        const state = reactive({
+            money: 1000,
+            car: {
+                brand: '宝马',
+                price: 100000
+            },
+            name: '查娜'
+        })
+        return {
+            ...refs(state)
+        }
+    }
+}
+
 ```
+
+### 4.6 readOnly
+- 传入一个对象(响应式或普通) 或 ref, 返回一个原始对象的自读代理
+- 一个只读对象是 深层的, 对象内部任何嵌套的属性也都是自读的
+- 可以防止对象被修改
+```js
+import { ref, readOnly } from 'vue'
+export default {
+    setup () {
+        const money = ref(100)
+        
+        return {
+            money: readOnly(money)
+        }
+
+    }
+}
+```
+
+### 4.7 计算属性 computed
+- Computed 函数用于创建一个计算属性
+- 如果传入的是一个 getter函数, 会返回一个不允许修改的计算属性
+- 如果传入的是一个带有 getter 和 setter函数的对象, 返回一个允许修改的计算属性
+```js
+import { ref, computed } from 'vue'
+export default {
+    setup () {
+        const age = ref(18)
+        // 1. 传入的是一个函数的 getter 返回的是一个不允许修改的计算属性
+        const nextage = computed(() => {
+            return age.value + 1
+        })
+        // 2. 传入一个函数的 get 和 set , 可以创建一个可以修改的计算属性
+        const nextage2 = computed(() => {
+            get () {
+                return parseInt(age.value) + 2
+            },
+            set (val) {
+                age.value = val - 2
+            }
+        })
+        return {
+            age,
+            nextage
+        }
+    }
+}
+```
+
+### 4.8 监听属性 Watch
+- Watch 函数接受3个参数
+    - 参数一: 数据源, 可以是 ref, reactive 或者 getter 函数
+    - 参数二: 回调函数
+    - 参数三: 额外选项, immediate  和 deep
+- Watch 可以监听一个 ref 或者一个带有返回值的 getter 函数
+- Wacht 可以监听单个数据源, 也可以监听多个数据源
+- Watch 函数会有返回值, 用于停止监听
+```js
+import { ref, reactive, toRefs, watch } from 'vue'
+export default {
+  setup () {
+    let money = ref(100)
+    const state = reactive({
+        money0: 1000,
+        car: {
+            brand: '宝马',
+            price: 1000000,
+        }
+    })
+    // 监听一般的 ref
+    watch(money, (newVal) => {
+        console.log(newVal, '一般的ref变了...')
+    })
+    // 监听包裹的基本类型
+    watch(() => state.money0, (newVal) => {
+        console.log(newVal, '包裹的基本类型变了...')
+    })
+    // 监听的包裹对象 需要 deep 参数
+    watch(() => state.car, (newVal) => {
+        console.log(newVal, '监听的对象变了...')
+    }, {
+        deep: true
+    })
+    // 监听包裹对象 的某一个属性
+    watch(() => state.car.brand, (newVal) => {
+        console.log(newVal, '监听的对象的某个属性变了...')
+    })
+    // 一次监听多个属性 
+    watch([money,() => state.money0, () => state.car,],([money, car]) => {
+        console.log(money, car, '监听多个属性...')
+    }, {
+        deep: true
+    })
+    // 直接监听一个 reactive  一般不用
+    watch(state, (val) => {
+        console.log(val, '监听的 reactive变化了... ')
+    }, {
+        deep: true
+    }) 
+    return {
+        money,
+        ...toRefs(state)
+    }
+  }
+}
+```
+
 
 
 
