@@ -65,3 +65,7 @@ console.log('resolve : ' + path.resolve('1.js'));
 
 // 路径中文件的后缀名
 console.log('ext name : ' + path.extname('main.js'));
+
+// 当前模块的目录名
+console.log(path.dirname(__filename))
+console.log(__filename)
