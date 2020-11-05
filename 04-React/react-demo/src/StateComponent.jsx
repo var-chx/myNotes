@@ -25,6 +25,12 @@ export default class StateComponent extends Component {
         })
         console.log(this.state.count)
     }
+    ppppp = async () => {
+        await this.setState({
+            count: this.state.count - 1
+        })
+        console.log(this.state.count)
+    }
     render () {
         return (
             <div>
@@ -32,7 +38,8 @@ export default class StateComponent extends Component {
                 <p>{this.state.count}</p>
                 <button onClick={this.inner}>增加</button>
                 <button onClick={this.ppp.bind(this)}>减少</button>
-                <button onClick={this.pppp.bind(this)}>减少</button>
+                <button onClick={this.pppp.bind(this)}>使用回调减少</button>
+                <button onClick={this.ppppp}>async减少</button>
             </div>
         )
     }
