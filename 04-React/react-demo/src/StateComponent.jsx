@@ -20,7 +20,10 @@ export default class StateComponent extends Component {
     pppp = function(){
         this.setState({
             count: this.state.count - 1
+        }, () => {
+            console.log(this.state.count)
         })
+        console.log(this.state.count)
     }
     render () {
         return (

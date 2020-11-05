@@ -76,7 +76,64 @@ this.props.data
 this.props.title
 // 注意单项数据流 使用时不能修改
 ```
+### 3.5 行内样式定义
+```
+<div style{{color: 'red'}}> 
+```
+
+### 3.6 绑定事件
+```
+// 行内方法
+<button onClick={ function () { console.log(123) } }></button>
+
+// 外部方法
+1. 和 render 平级 定义
+fn () {
+    console.log(123)
+}
+2. 使用
+<button onClick={this.fn}></button>
+
+```
+// 外部的标准使用
+```js
+1. 定义
+fn = (arg1) => {  // 这样就实现  可以使用 this.state  解决的 this 指向问题
+    console.log(arg1)
+}
+2. 使用 
+<button onClick={()=>this.fn('传参')}></button>  // 这样就实现 调用时传参
+```
+> 拓展: function 函数  this 谁调用指向谁; 箭头函数 指向上层
+
 ### 3.5 state 
+- this.setState() 是异步的 
+```js
+this.setState({
+    msg: '123'
+})
+console.log(this.state.msg) // 这里是拿不到最新的  还是old 值 说明 是异步的
+要想立即拿到  需要回调
+this.setState({
+    msg: '123'
+},() => {
+    this.state.mag // 这里就是最新的 msg的值
+})
+```
+### 3.5 组件的生命周期
+- React 的生命周期 分为三个部门
+    - 组件创建阶段 : 一辈子执行一次
+        - componentWillMount;
+        - render
+        - componentDidMount
+    - 组件运行阶段: 根据 props 和 state 的状态的改变, 选择性的执行一次或者多次
+        - componentWillReveiveProps
+        - shouldComponentUpdate
+        - componentWillUpdate
+        - render
+        - componentDidUpdate
+    - 组件销毁阶段 : 一辈子只执行一次
+        - componentWillUnmount
 
 
 

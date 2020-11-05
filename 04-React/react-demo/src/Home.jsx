@@ -3,7 +3,7 @@ export default class MyNav extends Component {
     render () {
         return (
             <div>
-                <ul>
+                <ul style={{color: 'red'}}>
                     {
                         this.props.nav.map((item, index) => <li key={index}>{item}</li>)
                     }
