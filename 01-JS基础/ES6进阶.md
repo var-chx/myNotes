@@ -3,13 +3,13 @@ Generator 和 async await 相关
 
 # ES6 进阶
 
-### let 和 const
-#### let
+### 1.  let 和 const
+#### 1.1 let
 - 不允许重复声明
 - 不存在变量提升
 - 有块级作用域
 - 声明后可以改变
-#### const
+#### 1.2 const
 - 不允许重复声明
 - 不存在变量提升
 - 有块级作用域
@@ -48,7 +48,7 @@ var constantize = (obj) => {
 ```
 
 
-#### 关于作用域的理解
+#### 1.3 关于作用域的理解
 ```js
 for (let i = 0; i < 3; i++) {
   let i = 'abc';
@@ -66,7 +66,7 @@ for (var i = 0; i<3; i++) {
 
 ```
 
-#### 暂时性死区
+#### 1.4 暂时性死区
 - 原因: 因为有了块级作用域 而且没有了变量提升
 - 案例:
 ```js
@@ -94,7 +94,7 @@ function bar0(x = 2, y = x) {
 
 bar(); // [2,2]
 ```
-#### ES6 声明变量的6中方式(ES5 只有 var 和 function)
+#### 1.5 ES6 声明变量的6中方式(ES5 只有 var 和 function)
 - var 
 - function
 - let
@@ -102,7 +102,7 @@ bar(); // [2,2]
 - import
 - class
 
-#### 顶层对象的理解
+#### 1.6 顶层对象的理解
 - 顶层对象，在浏览器环境指的是window对象，在 Node 指的是global对象。ES5 之中，顶层对象的属性与全局变量是等价的。
 ```js
 window.a = 1;
@@ -126,9 +126,9 @@ let b = 1;
 window.b // undefined
 ```
 
-### 解构赋值
-#### 赋值不成功 会等于 undefined
-#### 使用默认值: 只有当一个数组成员严格等于undefined，默认值才会生效 null 不可以。
+### 2 解构赋值
+#### 2.1 赋值不成功 会等于 undefined
+#### 2.2 使用默认值: 只有当一个数组成员严格等于undefined，默认值才会生效 null 不可以。
 ```
 let [x = 1, y = x] = [];     // x=1; y=1
 let [x = 1, y = x] = [2];    // x=2; y=2
@@ -148,7 +148,7 @@ y // 3
 var {x: y = 3} = {x: 5};
 y // 5
 ```
-#### 对象的解构要 注意 模式和变量
+#### 2.3 对象的解构要 注意 模式和变量
 ```js
 let obj = {
   p: [
@@ -172,7 +172,7 @@ x // 'Hello'
 y // 'World'
 p // ['Hello', {y: 'World'}]
 ```
-#### 用途
+#### 2.4 用途
 - 变换变量的值
 ```js
 let x = 1
@@ -196,11 +196,11 @@ let {foo, bar} = example0()
 
 ```
 
-### 对 String 的拓展
+### 3. 对 String 的拓展
 -  JSON.stringify() 的改造 编码的改进
 - 模板字符串
 
-### 扩展运算符
+### 4. 扩展运算符
 ```js
 const arr = [1, 34, 44, 88, 200, 123]
 
@@ -210,13 +210,13 @@ Math.max.apply(null, arr) // 200
 Math.max(...arr) // 200
 ```
 
-### 箭头函数 
+### 5. 箭头函数 
 - function 函数也是一个对象 但是箭头函数不是对象 它其实就是一个函数的语法糖
 - 函数内部没有 arguments 因为没有自己作用域连  
 - this 指向比较清晰 没有自己的 this 他的this 是他的上层
 - 不能使用 new 关键字来实例化对象 就是 箭头函数不能做构造函数
 
-### Symbol 数据类型
+### 6. Symbol 数据类型
 - 原始数据类型 它表示独一无二的值 js的第七种数据类型(null undefined Boolean String Number Object)
 - 用途就是定义对象的私有属性 for循环遍历不到
 ```js
@@ -236,7 +236,7 @@ Reflect.ownKeys(obj)  // [Symbol(name)]  数组
   
 ```
 
-### set
+### 7. set
 - 表示无重复的有序列表
 let abc = new Set()
 // 添加  
@@ -250,3 +250,65 @@ abc.push([1, 2, 3])
 abc.has(1) // true
 // 删除
 abc.delete(1) true
+
+### 8. class
+- 传统面向对象
+```js
+funtction Person (name, age) {
+    this.name = name
+    this.age = age
+}
+Person.info = 'aaa' // 这个info 就是静态属性  new 出来的 p1 访问不到
+Person.prototype.say = function () {
+    console.log('这是Person的实例方法')
+}
+Person.show = function () {
+    console.log('这个是静态方法')
+}
+// new 做了三件事
+    - 创建一个空对象
+    - 我们将这个空对象的__proto__成员指向了 Person 函数对象prototype成员对象
+    - 把之前的空对象的指针的引用 交给 p1
+const p1 = new Person('小明', 18) 
+console.log(p1)
+```
+- 用 class 创建
+```js
+class Person {
+    // 每个类都有一个构造器 不显式的定义也有个隐形的
+    // 作用: 每次new 的时候 就会执行 构造器中的代码
+    constructor (name, age) {
+        this.name = name  // 这个叫实例属性
+        this.age = age
+    }
+    static info = 'aaaa' // 可以使用 static 关键字 定义静态属性  和 constructor 平级
+    say () {
+        console.log('这是Person的实例方法')
+    }
+    static show () {
+        console.log('这个就是 静态方法')
+    }
+}
+cosnt p1 = new Person('小明', 18)
+console.log(p1.name)
+
+// 总结一下: 
+- 在 class 的 {} 中只能写 constructor 静态属性方法 实例属性方法
+- 其实 class 只是语法糖
+```
+- 继承 extends
+    - 语法 class 子类 extends 父类 {}
+    - 为什么要在 constructor 中调用 super
+        - 如果一个子类 通过 extends 关键字继承了父类 在子类中手动定义了 constructor 则必须首行调用 super()
+    - super 是个什么东西
+        - 它是一个函数 子类中的 super ()其实就是父类的 constructor 的一个引用 , 所以调一下就实现了继承 父的东西
+    - super 中要传参
+    ```js
+    // 子类
+    constructor(name, age, IDNumber) {
+        super(name, age)
+        this.IDNumber = IDNumber // 这个就子类自己的属性
+        // ....
+    }
+    ```
+- 
