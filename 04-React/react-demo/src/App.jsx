@@ -3,6 +3,7 @@ import Home from './Home'
 import StateComponent from './StateComponent'
 import FnComponent from './FnComponent'
 import LifeCycle from './LifeCycle'
+import IfDemo from './IfDemo'
 class App extends React.Component {
     render () {
         const nav1 = ['前端', '后端', '运维']
@@ -16,6 +17,7 @@ class App extends React.Component {
                 <FnComponent nav={nav1} />
                 <StateComponent />
                 <LifeCycle />
+                <IfDemo />
             </div>
         )
     }

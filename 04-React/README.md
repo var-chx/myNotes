@@ -135,7 +135,7 @@ this.setState({
     - 组件销毁阶段 : 一辈子只执行一次
         - componentWillUnmount
 
-### 组件之间的通信
+### 3.9 组件之间的通信
 - 父传子
 ```
 // 定义
@@ -149,6 +149,44 @@ this.props.clickChange()
 ```
 - 子修改父  可以通过 父穿过去的方法修改
 
-### 条件渲染
+### 3.10 条件渲染
+```
+// 简单用 if
+{ this.state.isShow && 
+    <div>
+        简单的用  使用我
+    </div>
+}
+
+// 简单的用 if-else
+<div>
+    The user is <b>{this.state.isShow ? 'true' : 'false'}</b> logged in.
+</div>
+
+// 大块用 先在 return 外 准备好 然后再丢进去
+render () {
+
+    let showView = this.state.isShow ?
+    <div>/大块jsx用我这样的/登录了</div> : 
+    <div>没有登录</div>
+
+    return (
+        <div>
+            {showView}
+        </div>
+    )
+}
+```
+
+### 3.11 列表渲染  
+- 使用 map 函数 
+- 注意使用 key
+    - 一般使用 唯一的id , 最后选择使用 索引
+    - 如果您选择不将明确的 键(key) 分配给列表项，那么 React 将默认使用索引作为键(key)。
+    - 如果列表项的顺序可能改变，我们不建议使用索引作为 keys。这可能会对性能产生负面影响，
+
+### 3.12 表单
+- 受控组件
+- 非受控组件
 
 
