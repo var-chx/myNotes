@@ -247,7 +247,8 @@ export default class NameFrom extends React.Component {
 // https://github.com/facebook/create-react-app/blob/master/docusaurus/docs/proxying-api-requests-in-development.md
 ```
 
-## 5. 路由
+## 5. Redux
+
 
 
 
