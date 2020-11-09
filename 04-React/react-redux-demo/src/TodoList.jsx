@@ -1,6 +1,7 @@
 import React from 'react'
 import { Input, Button, List } from 'antd'
 import store from './store'
+import { changeInputAction, addItemAction, delItemAction } from './store/actionCreators'
 export default class TodoList extends React.Component {
     // constructor (props) {
     //     super(props)
@@ -9,24 +10,16 @@ export default class TodoList extends React.Component {
     state = store.getState()
     inputChangeHandle = (e) => {
         console.log(e.target.value)
-        const action = {
-            type: 'changeInput',
-            value: e.target.value
-        }
+        const action = changeInputAction(e.target.value)
         store.dispatch(action)
         
     }
     btnAdd = () => {
-        const action = {
-            type: 'addItem'
-        }
+        const action = addItemAction()
         store.dispatch(action)
     }
     delItem = (id) => {
-        const action = {
-            type: 'delItem',
-            value: id
-        }
+        const action = delItemAction(id)
         store.dispatch(action)
     }
     componentDidMount () {
