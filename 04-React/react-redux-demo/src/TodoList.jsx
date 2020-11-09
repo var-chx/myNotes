@@ -2,6 +2,7 @@ import React from 'react'
 import { Input, Button, List } from 'antd'
 import store from './store'
 import { changeInputAction, addItemAction, delItemAction } from './store/actionCreators'
+import axios from 'axios'
 export default class TodoList extends React.Component {
     // constructor (props) {
     //     super(props)
@@ -26,6 +27,10 @@ export default class TodoList extends React.Component {
         store.subscribe(() => {
             this.setState(store.getState())
         })
+        axios.get('/api/list').then((res) => {
+            console.log(res.data)
+        })
+
     }
     render () {
         return (
