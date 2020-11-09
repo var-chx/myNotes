@@ -1,7 +1,12 @@
 import React from 'react'
 import { Input, Button, List } from 'antd'
+import store from './store'
 export default class TodoList extends React.Component {
-    
+    // constructor (props) {
+    //     super(props)
+    //     console.log(store.getState())
+    // }
+    state = store.getState()
     render () {
         const listData = [
             '早上8点开会',
@@ -19,7 +24,7 @@ export default class TodoList extends React.Component {
                         header={<div>Header</div>}
                         footer={<div>Footer</div>}
                         bordered
-                        dataSource={listData}
+                        dataSource={this.state.listData}
                         renderItem={item => (
                             <List.Item>
                             {item}
