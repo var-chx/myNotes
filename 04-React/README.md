@@ -238,6 +238,16 @@ export default class NameFrom extends React.Component {
     }
 }
 ```
-### 3.13 状态提升
+## 4. 跨域
+- 开发环境
+```
+//package.json
+"proxy": "http://tingapi.ting.baidu.com/"
+
+// https://github.com/facebook/create-react-app/blob/master/docusaurus/docs/proxying-api-requests-in-development.md
+```
+
+## 5. 路由
+
 
 
