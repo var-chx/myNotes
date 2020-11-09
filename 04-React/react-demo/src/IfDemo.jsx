@@ -1,10 +1,13 @@
 import { Component } from 'react'
 export default class IfDemo extends Component {
-    constructor () {
-        super()
-        this.state = {
-            isShow: true
-        }
+    // constructor () {
+    //     super()
+    //     this.state = {
+    //         isShow: true
+    //     }
+    // }
+    state = {
+        isShow: true
     }
     render () {
         let showView = this.state.isShow ?
@@ -15,7 +18,7 @@ export default class IfDemo extends Component {
             <div>
                 { this.state.isShow && 
                     <div>
-                        简单的用  使用我
+                        简单的用123  使用我
                     </div>
                 }
                 {showView}
