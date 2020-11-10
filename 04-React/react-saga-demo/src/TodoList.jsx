@@ -1,7 +1,8 @@
 import React from 'react'
 import { Input, Button, List } from 'antd'
 import store from './store'
-import { CHANGE_INPUT, ADD_ITEM } from './store/actionTypes'
+import axios from 'axios'
+import { CHANGE_INPUT, ADD_ITEM, GET_LIST } from './store/actionTypes'
 
 export default class TodoList extends React.Component {
     state = store.getState()
@@ -21,6 +22,14 @@ export default class TodoList extends React.Component {
     componentDidMount () {
         store.subscribe(() => {
             this.setState(store.getState())
+        })
+        axios.get('/api/list').then((res) => {
+            console.log(res.data, 9090)
+            const action = {
+                type: GET_LIST,
+                value: res.data
+            }
+            store.dispatch(action)
         })
     }
     render () {
