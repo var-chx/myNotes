@@ -1,13 +1,8 @@
 import React from 'react'
 import { Input, Button, List } from 'antd'
+import store from './store'
 export default class TodoList extends React.Component {
-    state = {
-        inputVal : '年后',
-        listData: [
-            '哈哈镜',
-            '我是你好'
-        ]
-    }
+    state = store.getState()
     inputChangeHandle = e => {
         alert(e.target.value)
         this.setState({
