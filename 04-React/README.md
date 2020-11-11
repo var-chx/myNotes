@@ -249,6 +249,13 @@ export default class NameFrom extends React.Component {
 
 ## 5. Redux
 
+## 6. 项目中使用  scss
+```
+只用安装
+npm install node-sass@4.14.1 // 5.0版本 不兼容 sass-loader 会报错
+npm install sass-loader 
+```
+
 
 
 

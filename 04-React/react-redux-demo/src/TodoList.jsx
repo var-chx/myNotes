@@ -4,6 +4,7 @@ import store from './store'
 import { Provider } from 'react-redux'
 import TodoListReactRedux from './TodoListReactRedux'
 import { changeInputAction, addItemAction, delItemAction, getListData } from './store/actionCreators'
+import TestCssMoudle from './pages/TestCssMoudle'
 export default class TodoList extends React.Component {
     // constructor (props) {
     //     super(props)
@@ -63,6 +64,7 @@ export default class TodoList extends React.Component {
                 <Provider store={store}>
                     <TodoListReactRedux />
                 </Provider>
+                <TestCssMoudle />
             </>
         )
     }
