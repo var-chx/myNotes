@@ -1,4 +1,10 @@
 .divNode {
   color: pink;
   font-size: 50px;
+  .pNode {
+    color: yellow;
+  }
+  .aNode {
+    color: purple;
+  }
 }

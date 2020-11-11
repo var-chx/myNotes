@@ -4,7 +4,9 @@ export default class TestCssMoudle extends React.Component {
   render () {
     return (
       <div className={'divNode'}>
-        你好啊  我是css
+        <span className={'spanNode'}>你好啊</span>
+        <p className={'pNode'}>你好啊</p>
+        <a className={'aNode'}>你好啊</a>
       </div>
     )
   }
