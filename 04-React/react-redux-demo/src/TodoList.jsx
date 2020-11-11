@@ -1,10 +1,9 @@
 import React from 'react'
 import { Input, Button, List } from 'antd'
 import store from './store'
-import { Provider } from 'react-redux'
-import TodoListReactRedux from './TodoListReactRedux'
+
 import { changeInputAction, addItemAction, delItemAction, getListData } from './store/actionCreators'
-import TestCssMoudle from './pages/TestCssMoudle'
+
 export default class TodoList extends React.Component {
     // constructor (props) {
     //     super(props)
@@ -60,13 +59,6 @@ export default class TodoList extends React.Component {
                             >{item}</List.Item>
                         )}
                     />
-                </div>
-                <Provider store={store}>
-                    <TodoListReactRedux />
-                </Provider>
-                <TestCssMoudle />
-                <div className="divNode">
-                    <p className={'pNode'}>测试会不会污染 真的污染了</p>
                 </div>
             </>
         )
