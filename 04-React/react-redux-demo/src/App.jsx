@@ -5,6 +5,7 @@ import store from './store'
 import TodoListReactRedux from './TodoListReactRedux'
 import TestCssMoudle from '@pages/TestCssMoudle'
 import IconSvg from '@components/IconSvg'
+import FatherCom from '@pages/FatherToSon/FatherCom'
 
 export default function App (props) {
   return (
@@ -17,10 +18,11 @@ export default function App (props) {
         <div className="divNode">
             <p className={'pNode'}>测试会不会污染 真的污染了</p>
         </div>
-        <svg class="icon" aria-hidden="true">
+        <svg className="icon" aria-hidden="true">
             <use xlinkHref="#hx-all"></use>
         </svg>
         <IconSvg type='hx-code'/>
+        <FatherCom />
     </div>
   )
 }
