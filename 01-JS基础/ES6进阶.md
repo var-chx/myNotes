@@ -311,4 +311,38 @@ console.log(p1.name)
         // ....
     }
     ```
-- 
+- 9. 模块
+    - 9.1 export default 和 export 区别
+         
+        1. export与export default均可用于导出常量、函数、文件、模块等
+
+        2. 在一个文件或模块中，export可以有多个，export default仅有一个
+
+        4. 在一个模块中，可以同时使用export default 和export 向外暴露成员
+
+        5. 使用export向外暴露的成员，只能使用{  }的形式来import，这种形式，叫做【按需导出】,不需要，可以不在{ }中定义
+
+        6. export default 向外暴露的成员，可以使用任意变量来接收
+
+        7. 使用export导出的成员，必须严格按照导出时候的名称，来使用{ }按需接收
+
+        8. 使用export导出的成员，如果想换个变量名称接收，可以使用as来起别名
+```js
+// test.js
+let info = {
+    name: 'zs',
+    age: 20
+}
+export default info
+ 
+export let title = '小星星'
+ 
+export let content = '哈哈哈'
+```
+```js
+// mian.js  在main.js中接收，test.js使用export default 和 export 向外暴露的成员
+import person, {title, content as content1} from './test.js'
+console.log(person)    // 其实就是test.js 中的 info 因为是默认导出 可以用任意名字接收
+console.log(title)     // 其实就是test.js 中的 title
+console.log(content1)  // 其实就是test.js 中的content 注意对应关系
+```
