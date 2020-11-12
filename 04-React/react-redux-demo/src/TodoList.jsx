@@ -1,9 +1,9 @@
 import React from 'react'
 import { Input, Button, List } from 'antd'
 import store from './store'
-import { Provider } from 'react-redux'
-import TodoListReactRedux from './TodoListReactRedux'
+
 import { changeInputAction, addItemAction, delItemAction, getListData } from './store/actionCreators'
+
 export default class TodoList extends React.Component {
     // constructor (props) {
     //     super(props)
@@ -60,9 +60,6 @@ export default class TodoList extends React.Component {
                         )}
                     />
                 </div>
-                <Provider store={store}>
-                    <TodoListReactRedux />
-                </Provider>
             </>
         )
     }
