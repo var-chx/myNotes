@@ -3,8 +3,8 @@ import TodoList from './TodoList'
 import { Provider } from 'react-redux'
 import store from './store'
 import TodoListReactRedux from './TodoListReactRedux'
-import TestCssMoudle from './pages/TestCssMoudle'
-import IconSvg from './components/IconSvg'
+import TestCssMoudle from '@pages/TestCssMoudle'
+import IconSvg from '@components/IconSvg'
 
 export default function App (props) {
   return (
