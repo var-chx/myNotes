@@ -1,12 +1,12 @@
 import React from 'react'
-import './index.scss'
+import styles from './index.module.scss'
 export default class TestCssMoudle extends React.Component {
   render () {
     return (
-      <div className={'divNode'}>
-        <span className={'spanNode'}>你好啊</span>
-        <p className={'pNode'}>你好啊</p>
-        <a className={'aNode'}>你好啊</a>
+      <div className={styles.divNode}>
+        <span className={styles.spanNode}>你好啊</span>
+        <p className={styles.pNode}>你好啊</p>
+        <a className={styles.aNode}>你好啊</a>
       </div>
     )
   }
