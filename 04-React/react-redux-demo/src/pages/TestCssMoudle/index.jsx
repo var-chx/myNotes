@@ -6,7 +6,7 @@ export default class TestCssMoudle extends React.Component {
       <div className={styles.divNode}>
         <span className={styles.spanNode}>你好啊</span>
         <p className={styles.pNode}>你好啊</p>
-        <a className={styles.aNode}>你好啊</a>
+        <p href="#" className={styles.aNode}>你好啊</p>
       </div>
     )
   }
