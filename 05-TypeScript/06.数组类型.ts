@@ -26,10 +26,8 @@ function sum () {
         length: number
         callee: Function
     } = arguments
-
-
     console.log(args)
-    console.log(args0
+    console.log(args0)
 }
 
 // 5. any 在数组中的应用
