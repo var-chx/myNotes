@@ -45,9 +45,24 @@ interface Person2 {
     gender: boolean
     [propName: string]: string | number | boolean
 }
-let lucy = {
+let lucy: Person2 = {
     name: '路西',
     age: 19,
     gender: true,
     abc: 123
 }
+// 只读属性
+
+interface Person3 {
+    readonly id : number
+    name: string
+    age?: number
+    [propName: string]: any
+}
+
+let lily1:Person3  = {
+    id: 23,
+    name: 'lily',
+    age: 18,
+}
+// lily1.id = 23 无法分配到 "id" ，因为它是只读属性。
