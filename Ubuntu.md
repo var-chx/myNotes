@@ -8,3 +8,6 @@ flameshot gui
 、、 设置快捷键
 设置-> 设备-> 键盘 底部 + //alt q
 ```
+
+2. 安装微信
+https://blog.csdn.net/zzq997/article/details/105779935/
