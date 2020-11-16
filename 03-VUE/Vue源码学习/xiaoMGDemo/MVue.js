@@ -3,9 +3,10 @@
 const compileUtil = {
     // 获取值的方法
     getVal(expr, vm) {
-        return expr.split('.').reduce((data, currentVal) => {
-            return data[currentVal]
-        }, vm.$data)
+        // name.ccc.ddd
+        return expr.split('.').reduce((data, currentVal) => { // data: 初始值 ; currentVal: 每次循环的项 
+            return data[currentVal] // 每循环一次深入一层
+        }, vm.$data) // vm.$data 是一个可选值 首次循环 给一个初始值
     },
     //设置值
     setVal(vm,expr,val){
@@ -182,7 +183,7 @@ class Compile {
         // console.log(el.firstChild);
         let firstChild;
         while (firstChild = el.firstChild) {
-            fragment.appendChild(firstChild);
+            fragment.appendChild(firstChild);  // appendChild 方法具有可移动性 先抽出 再插入
         }
         return fragment
     }

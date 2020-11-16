@@ -66,3 +66,6 @@
     - 达到:
         - 数据变化 -> 视图更新；
         - 视图交互变化(input) -> 数据model变更的双向绑定效果
+
+## 参考
++ [JS中文档碎片的理解和使用](https://www.cnblogs.com/suihang/p/9491359.html)
