@@ -45,7 +45,7 @@
     - 利用Obeject.defineProperty()来监听属性变动 那么将需要observe的数据对象进行递归遍历，包括子属性对象的属性，都加上 setter和getter 
     - 这样的话，给这个对象的某个值赋值，就会触发setter，那么就能监听到了数据变化。。
 - 4.2 Dep:
-    - 添加订阅者(Watcher)
+    - 添加订阅者(Watcher) 其实就是事件模型
     - 定义通知的方法
 - 4.3 实现一个Watcher
     - 它作为连接Observer和Compile的桥梁，能够订阅并收到每个属性变动的通知，执行指令绑定的相应回调函数，从而更新视图
@@ -56,7 +56,7 @@
 - 4.4 代理 proxy
     - 我们在使用vue的时候,通常可以直接vm.msg来获取数据,这是因为vue源码内部做了一层代理.也就是说把数据获取操作vm上的取值操作 都代理到vm.$data上
 
-## 终极理解 vue的MVVM响应式原理
+## 理解 vue的MVVM响应式原理
 - vue.js 则是采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter，getter，在数据变动时发布消息给订阅者，触发相应的监听回调。
 
 - MVVM作为数据绑定的入口，整合Observer、Compile和Watcher三者，
