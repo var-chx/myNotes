@@ -193,23 +193,4 @@ read('./index.js', 'utf-8').then((data) => {
 })
 ```
 
-## 6. node 中模块的加载策略
-- 以 const template = require(‘art-template’) 为例：
-     
-    1. 先找到当前文件所处目录中的 node_modules 目录
 
-    2. 然后根据art-template 中的 package.json 找到文件中的 main 属性
-
-    3. main 属性中就记录了 art-template 的入口模块
-
-    4. 然后加载使用这个第三方包，但是实际上最终加载的还是文件
-
-    5. 如果 package.json 文件不存在或者 main 指定的入口模块是也没有
-
-    6. 则 node 会自动找该目录下的 index.js，也就是说 index.js 会作为一个默认备选项
-
-    7. 如果以上所有任何一个条件都不成立，则会进入上一级目录中的 node_modules 目录查找
-
-    8. 如果上一级还没有，则继续往上上一级查找
-
-    9. 如果直到当前磁盘根目录还找不到，最后报错： can not find module xxx
