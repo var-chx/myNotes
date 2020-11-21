@@ -1,14 +1,37 @@
 # Git使用规范及分支管理
 
 ## 常用Git命令
++ 查看版本: git --version
+
++ 查看git配置: git config --list  
+```
+alias.st = status  // 就是配置了bieming
+alias.cm = commit -m 
+```
+    + 配置全局 email 和 name
+    ```sh
+    git config --global user.name 'chuhx'
+    git config --global user.email '123@126.com'
+    ```
+    + 设置当前仓库 email 和 name
+    ```sh
+    git config user.name 'xiaoming'
+    # --loacl 可以省略
+    git config --local user.email 'vip@126.com'
+    ```
 + 查看分支：git branch
 
 + 创建分支：git branch <name>
 
-+ 切换分支：git checkout <nam
++ 切换分支：git checkout <name>
+
 + 创建+切换分支：git checkout -b <name>
 
 + 合并某分支到当前分支：git merge <name>  
+
++ 抓取(跟新本地的 远端分支): git fetch origin dev
+
++ 撤销提交: git reset --hard 10bb4
 
 + 删除分支：git branch -d <name> 注意:删除当前分支 需要切换到其他分支   如果要删除的分支没有和当前的分支合并 会提示的 删除失败  真要删除 用 -D
 
