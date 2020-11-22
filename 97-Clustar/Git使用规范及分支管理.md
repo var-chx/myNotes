@@ -19,6 +19,9 @@ alias.cm = commit -m
     # --loacl 可以省略
     git config --local user.email 'vip@126.com'
     ```
++ 创建 tag: git tag v1.1.3 (git tag -a v1.1.2 -m "我是备注")
+https://www.extfans.com/search/
+
 + 查看分支：git branch
 
 + 创建分支：git branch <name>
