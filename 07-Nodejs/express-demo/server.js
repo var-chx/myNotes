@@ -3,8 +3,10 @@ const app = express()
 const Router = require('./routers')
 const mongoose = require('mongoose');
 
-app.use('/', Router)
+app.use(express.urlencoded({extended: true})) // 请求体参数是: name=tom&pwd=123
+app.use(express.json()) // 请求体参数是json结构: {name: tom, pwd: 123}
 
+app.use('/', Router)
 mongoose.connect('mongodb://localhost/my_app', {useNewUrlParser: true})
 .then(() => {
     console.log('数据库连接成功')
