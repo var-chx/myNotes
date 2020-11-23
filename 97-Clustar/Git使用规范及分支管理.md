@@ -33,6 +33,8 @@ alias.cm = commit -m
 
 + 撤销提交: git reset --hard 10bb4
 
++ 抓取: git fetch 相当于是从远程获取最新的版本到本地, 不会自动 merge
+
 + 删除分支：git branch -d <name> 注意:删除当前分支 需要切换到其他分支   如果要删除的分支没有和当前的分支合并 会提示的 删除失败  真要删除 用 -D
 
 ## 分支管理
