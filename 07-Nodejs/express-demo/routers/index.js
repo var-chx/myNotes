@@ -27,6 +27,22 @@ Router.post('/api/login', (req, res) => {
     })
 })
 
+// 添加角色 /manage/role/add
+
+Router.post('/api/manage/role/add', (req, res) => {
+    const { roleName } = req.body
+    console.log(roleName, 90)
+    RoleModel.create({ name: roleName})
+    .then(role => {
+        res.send({status: 0, data: role})
+    })
+    .catch(err => {
+        console.error('添加角色异常', err)
+        res.send({status: 1, msg: '添加角色异常, 请重新尝试'})
+    })
+})
+
+
 // 测试 get
 Router.get('/api/login', (req, res) => {
     console.log(req)
