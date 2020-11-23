@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "blueimp-md5": "^2.18.0",
     "express": "^4.17.1",
     "mongoose": "^5.10.15"
   }

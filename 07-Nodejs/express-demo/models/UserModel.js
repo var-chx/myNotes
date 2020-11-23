@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const md5 = require('blueimp-md5')
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true},
     password: { type: String, required: true},
@@ -9,11 +10,11 @@ const userSchema = new mongoose.Schema({
 })
 const UserModel = mongoose.model('users', userSchema)
 
-UserModel.findOne({userName: 'admin'}).then(user => {
+UserModel.findOne({username: 'admin'}).then(user => {
     if (!user) {
         UserModel.create({
             username: 'admin',
-            password: 'admin'
+            password: md5('admin')
         }).then(user => {
             console.log('初始化了用户')
         })
