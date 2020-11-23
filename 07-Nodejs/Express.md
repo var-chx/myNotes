@@ -94,6 +94,7 @@ app.get('/list*', (req, res)=>{
 })
 ```
 
+
 ## Express 搭建静态资源库
 > Express 提供了内置的中间件 express.static 来设置静态文件如：图片， CSS, JavaScript 等。
 
@@ -125,7 +126,16 @@ http://localhost:8083/static/index.html
 app.use('/static', express.static(path.join(__dirname, 'public')))
 ```
 
-## Express 模板 略...
+## Express 处理 post 请求的 body 参数 
+```js
+// server.js
+
+// 如果不设置  无法拿到   application/x-www-form-urlencoded 格式的参数
+app.use(express.urlencoded()) // 请求体参数是: name=tom&pwd=123
+
+// 如果不设置  post 请求 res.body 为 undefined
+app.use(express.json()) // 请求体参数是json结构: {name: tom, pwd: 123}
+```
 
 
 
