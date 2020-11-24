@@ -16,11 +16,12 @@ Router.post('/api/login', (req, res) => {
                 RoleModel.findOne({_id: user.role_id})
                 .then(role => {
                     user._doc.role = role
+                    res.send({status: 0, data: user})
                 })
             } else {
                 user._doc.role = {menus: []}
+                res.send({status: 0, data: user})
             } 
-            res.send({status: 0, data: user})
         } else { // 登录失败
             res.send({status: 1, msg: '用户名或密码不对'})
         }
@@ -31,7 +32,6 @@ Router.post('/api/login', (req, res) => {
 
 Router.post('/api/manage/role/add', (req, res) => {
     const { roleName } = req.body
-    console.log(roleName, 90)
     RoleModel.create({ name: roleName})
     .then(role => {
         res.send({status: 0, data: role})
@@ -42,6 +42,64 @@ Router.post('/api/manage/role/add', (req, res) => {
     })
 })
 
+// 获取所有角色list
+Router.get('/api/manage/role/list', (req, res) => {
+    RoleModel.find()
+    .then(roles => {
+        res.send({status: 0, data: roles})
+    })
+    .catch(err => {
+        res.send({status: 1, msg: '获取角色列表异常'})
+    })
+
+})
+
+// 更新角色 也就是给角色设置权限
+Router.post('/api/manage/role/update', (req, res) => {
+    const role = req.body
+    role.auth_time = Date.now()
+    RoleModel.findOneAndUpdate({_id: role._id}, role)
+    .then( oldRole => {
+        res.send({status: 0 , data: { ...oldRole._doc, ...role }})
+    })
+    .catch(err => {
+        res.send({status: 1, msg: '更新异常'})
+    })
+})
+
+// 获取用户
+Router.get('/api/manage/user/list', (req, res) => {
+    UserModel.find()
+    .then(users => {
+        RoleModel.find()
+        .then(roles => {
+            res.send({status: 0, data: {users, roles}})
+        })
+    })
+})
+
+// 添加用户
+Router.post('/api/manage/user/add', (req, res) => {
+    UserModel.create({...req.body, password: md5(req.body.password)})
+    .then(role => {
+        res.send({status: 0, data: role})
+    })
+    .catch(err => {
+        console.error('添加角色异常', err)
+        res.send({status: 1, msg: '添加角色异常, 请重新尝试'})
+    })
+})
+
+// 删除用户
+
+Router.post('/api/manage/user/delete', (req, res) => {
+    const { userId : _id } = req.body
+    UserModel.deleteOne({_id})
+    .then(() => {
+        res.send({status: 0})
+    })
+
+})
 
 // 测试 get
 Router.get('/api/login', (req, res) => {
