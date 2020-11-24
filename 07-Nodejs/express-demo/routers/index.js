@@ -3,6 +3,7 @@ const Router = express.Router()
 const md5 = require('blueimp-md5')
 const UserModel = require('../models/UserModel')
 const RoleModel = require('../models/RoleModel')
+const CategoryModel = require('../models/CategoryModel')
 
 // 登录接口
 Router.post('/api/login', (req, res) => {
@@ -101,20 +102,25 @@ Router.post('/api/manage/user/delete', (req, res) => {
 
 })
 
-// 测试 get
-Router.get('/api/login', (req, res) => {
-    console.log(req)
-    console.log(req.body, 9091)
-    console.log(req.query, 9090)
-    UserModel.findOne({username: 'admin'})
-    .then(user => {
-        res.set({
-            'Content-Type': 'text/plain',
-        })
-        res.cookie('userid', user._id, {maxAge: 1000 * 60 * 60 * 24})
-        res.send(user)
+// 添加品类
+Router.post('/api/manage/category/add', (req, res) => {
+    const { categoryName : name, parentId } = req.body
+    CategoryModel.create({name, parentId}).then((category) => {
+        res.send({status: 0, data: category})
+    }).catch((err) => {
+        console.log('添加分类失败$', err)
     })
 })
+
+// 获取分类列表
+
+Router.get('/api/manage/category/list', (req, res) => {
+    const { parentId } = req.query
+    CategoryModel.find({parentId}).then((categorys) => {
+        res.send({status: 0, data: categorys})
+    })
+})
+
 
 
 module.exports = Router
