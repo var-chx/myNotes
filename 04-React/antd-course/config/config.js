@@ -10,8 +10,20 @@ export default {
         component: '../layout',
         routes: [
             {
-                path: 'helloworld',
+                path: '/',
                 component: './HelloWorld'
+            },
+            {
+                path: 'analysis',
+                component: './Dashboard/Analysis'
+            },
+            {
+                path: 'monitor',
+                component: './Dashboard/Monitor'
+            },
+            {
+                path: 'workplace',
+                component: './Dashboard/Workplace'
             }
         ]
     }]
