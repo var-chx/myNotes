@@ -15,6 +15,7 @@ let num2: number = Infinity
 // 字符串
 let str0: string = '123'
 let str1: string = `hello ${str0}${num0}`
+
 // 空值 : Void
 function alertNumber(): void {
     alert(1)
