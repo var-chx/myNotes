@@ -256,6 +256,11 @@ npm install node-sass@4.14.1 // 5.0版本 不兼容 sass-loader 会报错
 npm install sass-loader 
 ```
 
+## 7. 关于组件的优化
+- 组件的 定时器 要在 销毁的生命周期 取消
+- 父组件 视图更新  子组件没有必要更新时   可以是 在子组件的  shouldComponentUpdate(nextProps, nextState ) {  nextProps !== nextState}
+- 使用  extends react.PureComponent 对props数据进行的是浅比较
+
 
 
 
