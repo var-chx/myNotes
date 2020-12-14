@@ -11,8 +11,10 @@ const CodePreview: React.FC<{}> = ({ children }) => (
   </pre>
 );
 
-export default (): React.ReactNode => (
+export default (props): React.ReactNode => (
   <PageContainer>
+    {props.children}
+    欢迎 atart
     <Card>
       <Alert
         message="更快更强的重型组件，已经发布。"
@@ -52,5 +54,6 @@ export default (): React.ReactNode => (
       </Typography.Text>
       <CodePreview>yarn add @ant-design/pro-layout</CodePreview>
     </Card>
+    我会欢迎也------------end
   </PageContainer>
 );

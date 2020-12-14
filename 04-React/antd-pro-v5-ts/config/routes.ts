@@ -13,8 +13,17 @@
   {
     path: '/welcome',
     name: 'welcome',
+    access: 'canAdmin',
     icon: 'smile',
     component: './Welcome',
+    routes: [
+      {
+        path: '/welcome/sub-page',
+        name: 'sub-page',
+        icon: 'smile',
+        component: './Welcome',
+      },
+    ]
   },
   {
     path: '/access',
@@ -34,6 +43,12 @@
         name: 'sub-page',
         icon: 'smile',
         component: './Welcome',
+      },
+      {
+        path: '/admin/sub-page1',
+        name: 'sub-page',
+        icon: 'smile',
+        component: './ListTableList',
       },
     ],
   },
