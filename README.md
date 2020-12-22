@@ -4,4 +4,4 @@
 ## Demo
 | Name | Source code  | Disc |
 | ---- | ---- | ---- |
-| antd-vue-admin| [code](https://github.com/chuhx1024/antd-vue-admin)| 技术栈: Vue2.0 + antd-vue + vue-router + Vuex |
+| antd-vue-admin| [code](https://github.com/chuhx1024/antd-vue-admin?_blank)| 技术栈: Vue2.0 + antd-vue + vue-router + Vuex |
