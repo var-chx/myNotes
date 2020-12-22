@@ -1,5 +1,5 @@
 # MyNotes
-## 用于记录个人工作学习日常积累的demo
+## 用于记录个人工作学习玩耍过程中积累的demo
 
 ## Demo
 | Name | Source code  | Disc |
