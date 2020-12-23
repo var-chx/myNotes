@@ -97,7 +97,7 @@ ws.onclose = function() {
     ```js
     var express = require('express');
     var app = express();
-    var expressWs = require('express-ws')(app);
+    require('express-ws')(app);
     var util = require('util');
     app.ws('/ws', function(ws, req) {
     util.inspect(ws);
