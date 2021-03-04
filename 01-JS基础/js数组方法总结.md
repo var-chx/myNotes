@@ -15,22 +15,6 @@
 - slice：slice(start,end)，返回选定元素
 - reduce 累加
 - map,filter,forEach,some,every等不改变原数组
-```js
-// 注意:若数组的每项为对象  map 和forEach方法则会改变原数组  
- var arr=[
-    {name:"小明",age:15},
-    {name:"小华",age:16},
-    ];
- var abc=arr.map((item,index,arr)=>{
-    item.sex="男"
-    return item;
-  });
-  console.log(arr);//[{name: "小明", age: 15, sex: "男"},{name: "小华", age: 16, sex: "男"}]
-  console.log(abc);//[{name: "小明", age: 15, sex: "男"},{name: "小华", age: 16, sex: "男"}]
-```
-
-## map和forEach的区别  后者没有返回值    若案例改为forEach   则 abc为underfined
-
 ## 数组方法详细总结
 - Array.push()，向数组的末尾添加一个或多个元素，并返回新的数组长度。原数组改变。
 ```js
@@ -123,11 +107,25 @@ var result0 = arr.slice(1,3) // [2,3]
 var result1 = arr.slice(-3,-1) // [4,5] (顾前不顾后 所以不包含 6)
 ```
 
-
 - Array.forEach(function) 
     - 用于调用数组的每个元素，并将元素传递给回调函数。原数组不变。
     - 没法接收 结果为 undefined
-
+- Array.map(function) 
+    - map和forEach的区别  后者没有返回值    
+    - 若案例改为forEach   则 abc为underfined
+```js
+// 注意:若数组的每项为对象  map 和forEach方法则会改变原数组  
+ var arr=[
+    {name:"小明",age:15},
+    {name:"小华",age:16},
+    ];
+ var abc=arr.map((item,index,arr)=>{
+    item.sex="男"
+    return item;
+  });
+  console.log(arr);//[{name: "小明", age: 15, sex: "男"},{name: "小华", age: 16, sex: "男"}]
+  console.log(abc);//[{name: "小明", age: 15, sex: "男"},{name: "小华", age: 16, sex: "男"}]
+```
 - Array.filter(()=>{}) 过滤数组中 符合条件的元素并返回一个新数组 (不改变原数组 要接收)
 ```js
 var arr = [1,2,3,4,5]
