@@ -128,3 +128,4 @@ animationThreshold: 7 // 单种形式的元素大于 7 就会关闭动画
 myEcharts.clear()  // 之后可以再次调用 setOption() 设置
 ```
 - dispose // 销毁 不同于 clear
+- dispose // 销毁 不同于 clear
