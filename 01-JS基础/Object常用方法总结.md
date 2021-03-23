@@ -73,3 +73,27 @@ obj.prop = 33
 // Throws an error in strict mode
 ```
 
+- Object.is() 判断两个值 是否是相同值
+```js
+Object.is('foo', 'foo')    // ture
+Object.is(window, window)  // ture
+Object.is([], [])          // false
+
+const foo = {a: 1}
+const bar = {a: 1}
+Object.is(foo, bar)        // true
+
+```
+
+- Object.keys // 返回自身可枚举 属性的一个数组
+- Object.values // 返回自身可枚举的值
+```js
+
+const arr = ['a', 'ab', 'aaa']
+console.log(Object.keys(arr)) // ['0', '1', '2']
+console.log(Object.values(arr)) // ['a', 'ab', 'aaa']
+
+const obj = {name: '小米', age: 18}
+console.log(Object.keys(obj)) // ['name', 'age']
+console.log(Object.values(obj)) // ['小米', 18]
+```
