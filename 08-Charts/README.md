@@ -129,5 +129,3 @@ myEcharts.clear()  // 之后可以再次调用 setOption() 设置
 ```
 - dispose // 销毁 不同于 clear
 - dispose // 销毁 不同于 clear
-- dispose // 销毁 不同于 clear
-- dispose // 销毁 不同于 clear
