@@ -55,4 +55,33 @@ and I can't be doing that.
 
 It's exhausting and I have a bad back.
 
-T
+That Earl we're in love.
+
+Do not talk to him.
+
+unless you want to feel whiter than you already are.
+
+Oh and that stain?
+
+Not clam chowder.
+
+Go marry the ketchups. // 番茄酱
+
+Marry the ketchups, I'm on it.
+
+Okay, Now divorce the ketchups.
+
+Stop, Stop, Stop!
+
+There's no such thing as divorce the ketchups.
+
+You've never waitressed a day in your life.
+
+Yes I have.
+
+You expect me to believe you
+
+after watching that whole Temple Grandin routine?
+
+
+
