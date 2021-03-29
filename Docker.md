@@ -63,4 +63,79 @@
     - docker run -id -v /usr/local/test:/use/local/test --name=mycentos3 centos
     - 宿主机目录 : 容器目录
 
+### nginx 反向代理 web 项目的dockerfile 文件
+```ssh
+# develop stage
+FROM node:11.1-alpine as develop-stage
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --registry https://registry.npm.taobao.org
+COPY . .
+# build stage
+FROM develop-stage as build-stage
+RUN npm run build
+# production stage
+FROM nginx:1.15.7-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+```
+
+```sh
+# nginx.conf 
+user  nginx;
+worker_processes  1;
+
+error_log  /var/log/nginx/error.log warn;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        listen 80;
+        absolute_redirect   off;
+        location / {
+            root /usr/share/nginx/html;
+            index index.html;
+            try_files $uri $uri/ /index.html ;
+        }
+        location ~/api/ {
+            proxy_pass http://localhost:8975;  
+        }
+    }
+
+    include /etc/nginx/conf.d/*.conf;
+}
+```
+### 根据当前路径的 dockerfile  构建镜像
+```
+docker build -t nginx:v5 .  // nigix:v5 自己定义的镜像名称
+```
+### 根据镜像名称 run 出来容器
+
+```
+docker run -p 8080:80 nginx:v5 
+```
 
