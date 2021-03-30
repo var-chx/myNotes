@@ -132,6 +132,34 @@ http {
 ### 根据当前路径的 dockerfile  构建镜像
 ```
 docker build -t nginx:v5 .  // nigix:v5 自己定义的镜像名称
+
+ docker build -t 192.168.1.131/fate/nginx:v11 . //  这样就可以不用打tag 直接推到 lab了
+```
+### 把本地的镜像 打个tag (然后就可以推送到 harbo了)
+```
+docker tag nginx:v11  192.168.1.131/fate/nginx:v11  
+```
+## 登录前要设置 docker 客户端的本地配置
+
+setting--> Docker Engine --> 
+```
+{
+  "registry-mirrors": [
+    "https://r16ktk1i.mirror.aliyuncs.com"
+  ],
+  "debug": true,
+  "experimental": false,
+  "insecure-registries": ["192.168.1.131"] // 关键行  要和 harbor 保持一致
+}
+```
+### 推前要先登录
+
+```
+docker login 192.168.1.131 -u harbor -p Harbor12345
+```
+### 把构建好的镜像 推到 harbo
+```
+docker push 192.168.1.131/fate/nginx:v11
 ```
 ### 根据镜像名称 run 出来容器
 
