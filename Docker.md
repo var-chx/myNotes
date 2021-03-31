@@ -57,7 +57,7 @@
 - 删除容器 docker rm 9ocd122ds
 - 删除所有容器 docker rm $(docker ps -a -q)
 - 文件拷贝 
-    - 把当前文件夹的Mac.md 拷贝到容器 docker cp Mac.md mycentos2:/ 
+    - 把当前文件夹的 Mac.md 拷贝到容器 docker cp Mac.md mycentos2:/ 
     - 把容器中的文件复制到 当前目录 docker cp mycentos2:/abc.js ./
 - 目录挂载 
     - docker run -id -v /usr/local/test:/use/local/test --name=mycentos3 centos
@@ -115,19 +115,25 @@ http {
 
     server {
         listen 80;
-        absolute_redirect   off;
+
         location / {
             root /usr/share/nginx/html;
             index index.html;
-            try_files $uri $uri/ /index.html ;
+            try_files $uri $uri/ /index.html;
         }
-        location ~/api/ {
-            proxy_pass http://localhost:8975;  
+
+        location /api {
+            rewrite ^/api/(.*)$ /$1 break;
+            proxy_pass http://backend:9000;
+            proxy_redirect off;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         }
     }
 
-    include /etc/nginx/conf.d/*.conf;
 }
+
 ```
 ### 根据当前路径的 dockerfile  构建镜像
 ```
@@ -161,9 +167,104 @@ docker login 192.168.1.131 -u harbor -p Harbor12345
 ```
 docker push 192.168.1.131/fate/nginx:v11
 ```
-### 根据镜像名称 run 出来容器
+### 根据镜像名称 run 出来容器 -p 后跟端口映射(本机端口 : 容器的端口)
 
 ```
 docker run -p 8080:80 nginx:v5 
 ```
 
+## 关于 docker-compose 
+
+### 安装
+```
+```
+### yaml 文件
+
+```sh
+version: '2.3'
+services:
+  db:
+    image: 192.168.1.131/fate/mysql:8.0
+    volumes:
+      - $PWD/mysql:/var/lib/mysql
+    restart: always
+    command:
+      - mysqld
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: platform
+      MYSQL_DATABASE: ppc
+      MYSQL_USER: ppc_user_dev
+      MYSQL_PASSWORD: 111111
+      TZ: Asia/Shanghai
+    networks:
+      - platform
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+  db-migrate:
+    depends_on:
+      db:
+        condition: service_healthy
+    image: 192.168.1.131/fate/mysql:8.0
+    restart: on-failure
+    entrypoint:
+      - sh
+      - -c
+    command:
+      - |
+        set -ex
+        for sql in `ls -v /migrations/*.sql`; do
+          sleep 1
+          mysql -hdb -u$${MYSQL_USER} -p$${MYSQL_PASSWORD} \
+          --default-character-set=utf8mb4 $${MYSQL_DATABASE} < $$sql
+        done
+        echo "Scripts run completed"
+    environment:
+      MYSQL_DATABASE: ppc
+      MYSQL_USER: ppc_user_dev
+      MYSQL_PASSWORD: 111111
+      TZ: Asia/Shanghai
+    volumes:
+      - $PWD/ppc.sql:/migrations/ppc.sql
+    networks:
+      - platform
+  backend:
+    depends_on:
+      db:
+        condition: service_healthy
+    image: 192.168.1.131/fate/ppc-console:latest
+    restart: always
+    networks:
+      - platform
+    ports:
+      - 9000:9000
+  frontend:
+    depends_on:
+      - backend
+    image: 192.168.1.131/fate/nginx:v11
+    restart: always
+    networks:
+      platform:
+    ports:
+      - 8086:80
+    volumes:
+      - $PWD/nginx.conf:/etc/nginx/nginx.conf
+networks:
+  platform:
+    external: false
+
+```
+
+### docker-compose up 命令 
+
+- 格式为 docker-compose up [options] [SERVICE...] 该命令可以自动完成包括构建镜像，(重新)创建服务，启动服务，并关联服务相关容器的一系列操作。
+
+- 默认情况下，docker-compose up启动的容器都在前台，控制台将会同时打印所有容器的输出信息，可以很方便进行调试。当通过Ctrl+c停止命令时，所有容器将会停止。如果希望在后台启动并运行所有的容器，使用docker-compose up -d。
+
+- 如果服务容器已经存在，并且在创建容器后更改了服务的配置(即docker-compose.yml文件)或者镜像，那么docker-compose会停止容器，然后重新创建容器。
+
+- 注意： 这里的镜像修改指的是已经拉取到本地的镜像更改。当你的镜像仓库内容有变化，不会影响到本地的服务容器。如果你想更新本地的镜像，可以使用docker-compose pull [serviceName]。
