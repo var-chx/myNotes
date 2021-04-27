@@ -170,7 +170,7 @@ docker push 192.168.1.131/fate/nginx:v11
 ### 根据镜像名称 run 出来容器 -p 后跟端口映射(本机端口 : 容器的端口)
 
 ```
-docker run -p 8080:80 nginx:v5 
+docker run -p 8080:80 nginx:v1
 ```
 
 ## 关于 docker-compose 
