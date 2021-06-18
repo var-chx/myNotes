@@ -52,10 +52,9 @@ Object.defineProperty( o, 'name', {
     - 无法监测到对象属性的动态添加和删除
     - 无法监测到数组下标和length属性的变化
 - 解决方法
-    - Vue.set()
-    - Vue.delete()
-    - 重写vue中数组的方法 'push 等等'
-
+    - Vue.set() 用于动态给对象添加属性
+    - Vue.delete() 用于动态给对象删除属性
+    - 重写vue中数组的方法 'push 等等', 用于监测数据的变更
 ### 2.2 Vue 3.0 中响应式的原理
 - Vue 3.0 中使用ES6中的 proxy语法 实现数据的响应
 - 优点
@@ -175,7 +174,7 @@ import { ref } from 'vue'
 export default {
     setup () {
         let money = ref(100)
-        money ++ 
+        money.value ++ 
         return {
             money
         }
@@ -315,8 +314,8 @@ export default {
 ### 4.9 Lifecycle Hooks
 - 只能在 setup() 中使用
 - 3.0 对比 2.0
-    - beforeCreate -> use setup()
-    - created -> use setup()
+    - beforeCreate ->  setup()
+    - created -> setup()
     - beforeMount -> onBeforeMount
     - mounted -> onMounted
     - beforeUpdate -> onBeforeUpdate
