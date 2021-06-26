@@ -58,4 +58,91 @@
   }
 ```
 
+### 4. 画一个三角形
+```js
+width: 0;
+height: 0;
+border-width: 100px;
+border-style: solid;
+border-color: transparent transparent pink transparent;
+```
 
+### 5. 伪元素和伪类的区别总结
+1. 伪元素操作的是新生成的 DOM 元素 !! 伪类操作的是已存在的 DOM 元素
+2. 伪元素:
+    - :before :after :first-letter :first-line
+3. 伪类:
+    - :link :hover :first-child :last-child
+### 5. 清除浮动的集中方式, 及原理
+#### 方案一
+```
+父元素中, 追加空子元素, 并设置其 clear 属性为 both
+```
+#### 方案二
+```
+设置父元素浮动
+```
+#### 方案三
+```
+overflow: hidden or auto
+```
+#### 方案四
+```
+父元素设置 display: table;
+优势：不影响结构与表现的分离，语义化正确，代码量少
+弊端：盒模型属性已经改变，会造成其他问题
+```
+
+#### 方案五
+- 使用内容生成的方式清除浮动
+```
+.clearfix:after {
+   content:""; 
+   display: block; 
+   clear:both; 
+}
+```
+
+#### 方案六
+```
+.cf:before,.cf:after {
+   content:"";
+   display:table;
+}
+.cf:after { clear:both; }
+```
+
+
+### 7. 塌陷
+1. 其实是比较疑惑的 子元素浮动了 怎么会影响父元素
+2. 如果父元素只包含浮动的元素, 那么父元素的高度就会塌陷为0, 如果父元素没有背景 就很难发现
+
+### 8. background 属性
+```
+background:background-color ||background-image || background-repeat || background-attachment || background-position||background-size
+
+background-image:url("图片的网址"); 背景图 
+background: url(" 图片的网址 "); 背景 
+background-color:#色码; 背景色彩 
+background-position：默认值：0%  0%，可能值：top left ，center left等
+background-repeat：默认值：repeat
+scroll 拉动卷轴时，背景图片会跟着移动（缺省值） 
+fixed 拉动卷轴时，背景图片不会跟着移动 
+repeat 背景图片并排 
+background-size：是css3规定的属性，50%为缩放图片；100px 50px：把图片调整到100像素宽，50像素高；cover：拉大图片，使其完全填满背景区；container：缩放图片，使其恰好适合背景区
+```
+
+### 9. 行内(inline) 元素的一些属性
+- 行内元素不能设置宽高 都是内容撑开的 但是高度可以通过 line-height 调节
+- 行内元素的padding 属性 只可以用 padding-left padding-right 生效; padding-top padding-bottom 会改变元素的范围,但是不会对其他元素造成影响
+- 行内元素的margin属性只有 margin-left margin-right 生效; margin-top margin-bottom 不生效
+- 行内元素的 overflow 无效
+- vertical-align 属性无效(height 无效)
+
+### 10. 关于盒子模型
+- box-sizing:
+    - content-box; 默认值 只计算内容的宽度 
+    - padding-box; padding 计算在内
+    - border-box; border 和 padding  都计算在再内
+
+### 11. 
